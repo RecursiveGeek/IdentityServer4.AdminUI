@@ -1,0 +1,72 @@
+﻿@model IEnumerable<IdentityServer4.AdminUI.Models.IdentityClaims>
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<title>Identity Claims</title>
+<hr />
+
+@* Index Table *@
+<div class="card mb-3">
+    <div class="card-header">
+        <i></i>
+        <h2>Identity claims</h2>
+        <h2>    @Context.Session.GetString("IdentityResourceName")</h2>
+        <hr />
+        @* Below are the buttons at the top of the Index page table *@
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Options</th>
+                        <th>@Html.DisplayNameFor(model => model.IdentityResourceId)</th>
+                        <th>@Html.DisplayNameFor(model => model.Type)</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Options</th>
+                        <th>@Html.DisplayNameFor(model => model.IdentityResourceId)</th>
+                        <th>@Html.DisplayNameFor(model => model.Type)</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-fw fa-pen-square" ata-toggle="tooltip" title="Edit"></i></a> |
+                                <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-fw fa-info-circle" ata-toggle="tooltip" title="Details"></i></a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-fw fa-trash" ata-toggle="tooltip" title="Delete"></i></a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdentityResourceId)
+                                @* below is part of the attempt to get the client name. will work on this later.
+                                    @* <th>@IdentityServer4.AdminUI.Controllers.ClientSecretsController.GetClientName(item.Id) </th>> *@
+
+                                @* @Html.Action("GetclientName(item.Id,item)") *@
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at XX:XX XM</div>
+</div>
+<hr />
+<a asp-controller="IdentityClaims" asp-action="create">
+    <input type="submit" class="btn btn-info" value="New Claim" />
+</a>
+<i class="fas fa-square-full fa-xs fa-rotate-90"></i>
+<a asp-controller="IdentityResources" asp-action="Index">
+    <input type="submit" value=" Back to Identity Resources" class="btn btn-info" />
+</a>

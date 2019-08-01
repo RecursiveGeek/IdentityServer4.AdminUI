@@ -1,0 +1,61 @@
+﻿@model IEnumerable<IdentityServer4.AdminUI.Models.IdentityResources>
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Index";
+}
+<title>Identity Resources</title>
+<hr />
+
+@* Index Table *@
+<div class="card mb-3">
+    <div class="card-header">
+        <i></i>
+        <h2>Identity Resources</h2>
+        <hr />
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Options</th>
+                        <th>@Html.DisplayNameFor(model => model.DisplayName)</th>
+                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Options</th>
+                        <th>@Html.DisplayNameFor(model => model.DisplayName)</th>
+                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-fw fa-pen-square" ata-toggle="tooltip" title="Edit"></i></a> |
+                                <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-fw fa-info-circle" ata-toggle="tooltip" title="Details"></i></a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-fw fa-trash" ata-toggle="tooltip" title="Delete"></i></a> |
+                                <a asp-controller="IdentityClaims" asp-action="Index" asp-route-searchString="@item.Id" asp-route-name="@item.DisplayName"><i class="fas fa-fw fa-exclamation-triangle" ata-toggle="tooltip" title="Claims"></i></a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DisplayName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at XX:XX XM</div>
+</div>
+<hr />
+<a asp-controller="Identityresources" asp-action="create">
+    <input type="submit" class="btn btn-info" value="New resource" />
+</a>

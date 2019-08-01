@@ -1,0 +1,43 @@
+﻿@model IdentityServer4.AdminUI.Models.ClientGrantTypes
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Delete";
+}
+<title>GrantTypes - Delete</title>
+<hr />
+<h2>    @Context.Session.GetString("name")</h2>
+@* Display for delete information *@
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientId):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClientId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GrantType):
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.GrantType)
+        </dt>
+    </dl>
+    <hr />
+    @* Post delete and navigation buttons. *@
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-info" />
+    </form>
+    <hr />
+    <form asp-action="/Index">
+        <input type="submit" value="Back to GrantTypes" class="btn btn-info" />
+    </form>
+    <hr />
+    <form asp-controller="Clients" asp-action="Index">
+
+        <input type="submit" value=" Back to Clients" class="btn btn-info" />
+
+    </form>
+</div>

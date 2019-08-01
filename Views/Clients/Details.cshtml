@@ -1,0 +1,288 @@
+﻿@model IdentityServer4.AdminUI.Models.Clients
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Details";
+}
+<hr />
+
+<title>Admin-Details</title>
+@* Details table. *@
+<div class="card mb-3">
+    <div class="card-header">
+        <i></i>
+        <h2> Clients Details for:</h2>
+        <h2>    @Context.Session.GetString("name")</h2>
+        <hr />
+        @* Below are the buttons at the top of the details page table *@
+        <div class="form-inline">
+
+            <form asp-controller="ClientSecrets" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="Secrets" class="btn btn-outline-warning" />
+
+            </form>
+
+            <form asp-controller="ClientClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="Claims" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ClientCorsOrigins" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="CorsOrigins" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ClientGrantTypes" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="GrantTypes" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ClientIdPRestrictions" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="IdPRestrictions" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ClientPostLogoutRedirectUris" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="PosrLogoutRedirectUris" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ClientProperties" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="Properties" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ClientRedirectUris" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="RedirectUris" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ClientScopes" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="Scopes" class="btn btn-outline-warning" />
+
+            </form>
+
+        </div>
+
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Value</th>
+
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.AbsoluteRefreshTokenLifetime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.AbsoluteRefreshTokenLifetime)
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.AccessTokenLifetime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.AccessTokenLifetime)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> @Html.DisplayNameFor(model => model.AccessTokenType)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.AccessTokenType)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>    @Html.DisplayNameFor(model => model.AllowAccessTokensViaBrowser)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.AllowAccessTokensViaBrowser)
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> @Html.DisplayNameFor(model => model.AllowOfflineAccess)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.AllowOfflineAccess)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AllowPlainTextPkce)</td>
+                        <td>@Html.DisplayFor(model => model.AllowPlainTextPkce)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AllowRememberConsent)</td>
+                        <td>@Html.DisplayFor(model => model.AllowRememberConsent)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AlwaysIncludeUserClaimsInIdToken)</td>
+                        <td>@Html.DisplayFor(model => model.AlwaysIncludeUserClaimsInIdToken)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AlwaysSendClientClaims)</td>
+                        <td>@Html.DisplayFor(model => model.AlwaysSendClientClaims)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AuthorizationCodeLifetime)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.AuthorizationCodeLifetime)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.BackChannelLogoutSessionRequired)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.BackChannelLogoutSessionRequired)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.BackChannelLogoutUri)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.BackChannelLogoutUri)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> @Html.DisplayNameFor(model => model.ClientClaimsPrefix)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.ClientClaimsPrefix)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>  @Html.DisplayNameFor(model => model.ClientId)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.ClientId)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>  @Html.DisplayNameFor(model => model.ClientName)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.ClientName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> @Html.DisplayNameFor(model => model.ClientUri)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.ClientUri)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.ConsentLifetime)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.ConsentLifetime)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Description)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.Description)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.EnableLocalLogin)</td>
+                        <td> @Html.DisplayFor(model => model.EnableLocalLogin) </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Enabled)</td>
+                        <td>@Html.DisplayFor(model => model.Enabled) </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.FrontChannelLogoutSessionRequired)</td>
+                        <td> @Html.DisplayFor(model => model.FrontChannelLogoutSessionRequired) </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.FrontChannelLogoutUri)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.FrontChannelLogoutUri)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.IdentityTokenLifetime)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.IdentityTokenLifetime)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.IncludeJwtId)</td>
+                        <td>  @Html.DisplayFor(model => model.IncludeJwtId) </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.LogoUri) </td>
+                        <td>
+                            @Html.DisplayFor(model => model.LogoUri)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>    @Html.DisplayNameFor(model => model.PairWiseSubjectSalt)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.PairWiseSubjectSalt)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.ProtocolType)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.ProtocolType)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.RefreshTokenExpiration)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.RefreshTokenExpiration)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.RefreshTokenUsage)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.RefreshTokenUsage)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.RequireClientSecret)</td>
+                        <td> @Html.DisplayFor(model => model.RequireClientSecret)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.RequireConsent)</td>
+                        <td>@Html.DisplayFor(model => model.RequireConsent) </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.RequirePkce)</td>
+                        <td>@Html.DisplayFor(model => model.RequirePkce) </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.SlidingRefreshTokenLifetime)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.SlidingRefreshTokenLifetime)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.UpdateAccessTokenClaimsOnRefresh)</td>
+                        <td>   @Html.DisplayFor(model => model.UpdateAccessTokenClaimsOnRefresh) </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at ___</div>
+</div>
+@* Page Navigation buttons. *@
+
+
+<div>
+    <hr />
+    <form asp-action="/Index">
+        <input type="submit" value="Back to Clients" class="btn btn-info" />
+    </form>
+</div>

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<IdentityServer4.AdminUI.Models.ApiScopeClaims>
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<title>Api ScopesClaims</title>
+<hr />
+
+@* Index Table *@
+<div class="card mb-3">
+    <div class="card-header">
+        <i></i>
+        <h2>Api ScopeClaims</h2>
+        <h2>@Context.Session.GetString("ApiResourceName"):</h2>
+        <h2>@Context.Session.GetString("ApiScopeName")</h2>
+        <hr />
+        @* Below are the buttons at the top of the Index page table *@
+        <div class="form-inline">
+            <form asp-controller="ApiSecrets" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("ApiId")">
+
+                <input type="submit" value="Secrets" class="btn btn-outline-warning" />
+
+            </form>
+
+            <form asp-controller="ApiClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("ApiId")">
+
+                <input type="submit" value="Claims" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ApiScopes" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("ApiId")">
+
+                <input type="submit" value="Scopes" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ApiScopeClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("ApiScopeId")">
+
+                <input type="submit" value="ScopeClaims" class="btn btn-outline-primary" />
+
+            </form>
+        </div>
+    </div>
+
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Options</th>
+                        <th>@Html.DisplayNameFor(model => model.ApiScopeId)</th>
+                        <th>@Html.DisplayNameFor(model => model.Type)</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Options</th>
+                        <th>@Html.DisplayNameFor(model => model.ApiScopeId)</th>
+                        <th>@Html.DisplayNameFor(model => model.Type)</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-fw fa-pen-square" ata-toggle="tooltip" title="Edit"></i></a> |
+                                <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-fw fa-info-circle" ata-toggle="tooltip" title="Details"></i></a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-fw fa-trash" ata-toggle="tooltip" title="Delete"></i></a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ApiScopeId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card-footer small text-muted">Updated yesterday at XX:XX XM</div>
+</div>
+<div>
+
+
+    @* Page Navigation buttons. *@
+    <hr />
+    <a asp-controller="ApiScopeClaims" asp-action="create">
+        <input type="submit" class="btn btn-info" value="New Scope Claim" />
+    </a>
+    <i class="fas fa-square-full fa-xs fa-rotate-90"></i>
+    <a asp-controller="ApiResources" asp-action="Index">
+        <input type="submit" value=" Back to Api Scopes" class="btn btn-info" />
+    </a>
+</div>

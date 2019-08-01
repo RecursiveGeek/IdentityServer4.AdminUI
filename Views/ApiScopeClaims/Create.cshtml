@@ -1,0 +1,66 @@
+﻿@model IdentityServer4.AdminUI.Models.ApiScopeClaims
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+<title>ApiScopeClaims-Create</title>
+<h4>ApiScopeClaims</h4>
+<hr />
+@* Create form to be  posted *@
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ApiScopeId" class="control-label"></label>
+                <input asp-for="ApiScopeId" readonly class="form-control" id=" @Context.Session.GetInt32("ApiScopeId")" value="@Context.Session.GetInt32("ApiScopeId")" />
+                <span asp-validation-for="ApiScopeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <input asp-for="Type" class="form-control" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-info" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+@*This is the button to trigger the modal below.*@
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#Confirm_Leave">
+    Back to ScopeClaims
+</button>
+
+@* Modal window *@
+<div class="modal fade" id="Confirm_Leave" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to leave?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                If you leave changes you made will be not be saved.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                <form asp-action="/Index">
+                    <input type="submit" value="Back to ScopeClaims" class="btn btn-info" />
+                </form>
+                <form asp-controller="ApiResources" asp-action="Index">
+                    <input type="submit" value=" Back to Api Resources" class="btn btn-info" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<IdentityServer4.AdminUI.Models.Clients>
+
+@{
+    ViewData["Title"] = "Clients";
+}
+@using Microsoft.AspNetCore.Http;
+
+<title>Admin-Clients</title>
+@* Index Table *@
+<html lang="en">
+<body id="page-top">
+    <hr />
+    <div id="wrapper">
+        <div class="container-fluid">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i></i>
+                    <h2>Clients</h2>
+
+                    <form action="/clients/create" method="get">
+                        <span style=" float:right">
+                            <button type="submit" class="btn btn-info">New Client</button>
+                        </span>
+
+                    </form>
+
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Options</th>
+                                    <th>@Html.DisplayNameFor(model => model.ClientName)</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Options</th>
+                                    <th>@Html.DisplayNameFor(model => model.ClientName)</th>
+
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-fw fa-pen-square" ata-toggle="tooltip" title="Edit"></i></a> |
+                                            <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-fw fa-info-circle" ata-toggle="tooltip" title="Details"></i></a> |
+                                            <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-fw fa-trash" ata-toggle="tooltip" title="Delete"></i></a> |
+                                            <a asp-controller="Clientsecrets" asp-action="Index" asp-route-searchString="@item.Id" asp-route-name="@item.ClientName"><i class="fas fa-fw fa-user-secret" ata-toggle="tooltip" title="Secrets"></i></a> |
+                                            <a asp-controller="ClientRedirectUris" asp-action="Index" asp-route-searchString="@item.Id" asp-route-name="@item.ClientName"><i class="fas fa-fw fa-link" ata-toggle="tooltip" title="Urls"></i></a>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ClientName)
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer small text-muted">Updated yesterday at XX:XX XM</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

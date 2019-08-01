@@ -1,0 +1,71 @@
+﻿@model IdentityServer4.AdminUI.Models.ClientGrantTypes
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<title>GrantTypes - Edit</title>
+<hr />
+<h2>Edit - GrantTypes</h2>
+<h2>    @Context.Session.GetString("name")</h2>
+@* Edit Form (to be posted) *@
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ClientId" class="control-label"></label><input asp-for="ClientId" readonly class="form-control" id=" @Context.Session.GetInt32("id")" value="@Context.Session.GetInt32("id")" />
+                <span asp-validation-for="ClientId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrantType" class="control-label"></label>
+                @Html.DropDownList("GrantType", new SelectList(new GrantTypes()), new { @class = "form-control" })
+                <span asp-validation-for="GrantType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <hr />
+                <input type="submit" value="Save" class="btn btn-success" />
+                <hr />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+@*This is the button to trigger the modal below.*@
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#Confirm_Leave">
+    Back to GrantTypes
+</button>
+
+@* Modal window *@
+<div class="modal fade" id="Confirm_Leave" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to leave?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                If you leave changes you made will be not be saved.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                <form asp-action="/Index">
+                    <input type="submit" value="Back to GrantTypes" class="btn btn-info" />
+                </form>
+                <form asp-controller="Clients" asp-action="Index">
+
+                    <input type="submit" value=" Back to Clients" class="btn btn-info" />
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

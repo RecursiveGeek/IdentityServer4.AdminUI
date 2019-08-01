@@ -1,0 +1,94 @@
+﻿@model IdentityServer4.AdminUI.Models.ApiScopeClaims
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Details";
+}
+<title>ApiScopeClaims-Details</title>
+<hr />
+@* Details table. *@
+<div class="card mb-3">
+    <div class="card-header">
+        <i></i>
+        <h2>Api Scope Details for: </h2>
+        <h2>    @Context.Session.GetString("ApiResourceName")</h2>
+        <hr />
+        @* Below are the buttons at the top of the details page table *@
+        <div class="form-inline">
+            <form asp-controller="ApiSecrets" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("ApiId")">
+
+                <input type="submit" value="Secrets" class="btn btn-outline-warning" />
+
+            </form>
+
+            <form asp-controller="ApiClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("ApiId")">
+
+                <input type="submit" value="Claims" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ApiScopes" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("ApiId")">
+
+                <input type="submit" value="Scopes" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ApiScopeClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("ApiScopeId")">
+
+                <input type="submit" value="ScopeClaims" class="btn btn-outline-primary" />
+
+            </form>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Value</th>
+
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Id)
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.ApiScopeId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.ApiScopeId)
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> @Html.DisplayNameFor(model => model.Type)</td>
+                        <td>@Html.DisplayFor(model => model.Type)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at ___</div>
+</div>
+
+@* Page Navigation buttons. *@
+<div>
+    <hr />
+
+    <a asp-action="Edit" asp-route-id="@Model.Id"><input type="submit" value="Edit" class="btn btn-info" /></a>
+    <i class="fas fa-square-full fa-xs fa-rotate-90"></i>
+    <a asp-action="Index"><input type="submit" value=" Back to Api Resources" class="btn btn-info" /></a>
+</div>

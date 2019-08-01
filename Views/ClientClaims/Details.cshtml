@@ -1,0 +1,134 @@
+﻿@model IdentityServer4.AdminUI.Models.ClientClaims
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Details";
+}
+
+<hr />
+<title>Claims-Details</title>
+@* Details table. *@
+<div class="card mb-3">
+    <div class="card-header">
+        <i></i>
+        <h2>Claim  Details For: </h2>
+        <h2>    @Context.Session.GetString("name")</h2>
+        <hr />
+        @* Below are the buttons at the top of the details page table *@
+        <div class="form-inline">
+
+            <form asp-controller="ClientSecrets" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="Secrets" class="btn btn-outline-warning" />
+
+            </form>
+
+            <form asp-controller="ClientClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="Claims" class="btn btn-outline-primary" />
+
+            </form>
+            <form asp-controller="ClientCorsOrigins" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="Cors Origins" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ClientGrantTypes" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="Grant Types" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ClientIdPRestrictions" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="Id PRestrictions" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ClientPostLogoutRedirectUris" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="Post Logout Redirect Uris" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ClientProperties" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="Properties" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ClientRedirectUris" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="Redirec tUris" class="btn btn-outline-warning" />
+
+            </form>
+            <form asp-controller="ClientScopes" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+
+                <input type="submit" value="Scopes" class="btn btn-outline-warning" />
+
+            </form>
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Value</th>
+
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Id)
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.ClientId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.ClientId)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> @Html.DisplayNameFor(model => model.Type)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.Type)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>    @Html.DisplayNameFor(model => model.Value)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.Value)
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at ___</div>
+</div>
+
+
+@* Page Navigation buttons. *@
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id"><input type="submit" value="Edit" class="btn btn-info" /></a>
+    <i class="fas fa-square-full fa-xs fa-rotate-90"></i>
+    <a asp-action="Index"><input type="submit" value=" Back to claims" class="btn btn-info" /></a>
+    <i class="fas fa-square-full fa-xs fa-rotate-90"></i>
+    <a asp-controller="Clients" asp-action="Index">
+
+        <input type="submit" value=" Back to Clients" class="btn btn-info" />
+    </a>
+</div>
