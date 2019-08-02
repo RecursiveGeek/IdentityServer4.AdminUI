@@ -1,6 +1,9 @@
 ﻿<!DOCTYPE html>
 <html>
-
+@{
+    @*Note: below retrieves the copyright year and message, the copyright symbol is manually placed in the footer.*@
+    var copyright = IdentityServer4.AdminUI.Models.ConfigurationManager.AppSetting["Custom:Copyright"];
+}
 <head>
 
     <meta charset="utf-8">
@@ -9,19 +12,37 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+</head>
+<div name="scripts">
     @*  The ~/ added allows all pages to hit this  *@
     @* The "~" causes it to find the file, if the pages go "deep" (i.e. clients/create) then it still can locate it *@
-    <!-- Custom fonts for this template-->
+    @*Custom fonts for this template*@
     <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Page level plugin CSS-->
+    @*Page level plugin CSs*@
     <link href="~/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
-    <!-- Custom styles for this template-->
+    @*Custom styles for this template*@
     <link href="~/css/sb-admin.css" rel="stylesheet">
+    @*Bootstrap core JavaScript*@
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-</head>
+    @*Core plugin JavaScript*@
+    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
 
+    @*Page level plugin JavaScript*@
+    <script src="~/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    @*Custom scripts for all pages*@
+    <script src="~/js/sb-admin.min.js"></script>
+
+    @*Demo scripts for this page*@
+    <script src="~/js/demo/datatables-demo.js"></script>
+    <script src="~/js/demo/chart-area-demo.js"></script>
+</div>
 
 <body style=" border-left-width: 0px; margin-left: 0px;">
     <nav class="navbar navbar-expand navbar-light static-top" style="background-color: #000000;">
@@ -68,33 +89,16 @@
 
     @RenderSection("Scripts", required: false)
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="~/vendor/jquery/jquery.min.js"></script>
-    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Page level plugin JavaScript-->
-    <script src="~/vendor/chart.js/Chart.min.js"></script>
-    <script src="~/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="~/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="~/js/sb-admin.min.js"></script>
-
-    <!-- Demo scripts for this page-->
-    <script src="~/js/demo/datatables-demo.js"></script>
-    <script src="~/js/demo/chart-area-demo.js"></script>
     <div id=" wrapper">
 
- <div class="container body-content" >
-                @RenderBody()
-                <hr />
-            </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+        </div>
     </div>
 </body>
 </html>
 <footer>
-    <p>&copy; 2019 - IdentityServer4.AdminUI</p>
+    <p>&copy;@copyright</p>
 </footer>

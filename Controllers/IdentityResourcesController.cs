@@ -59,7 +59,7 @@ namespace IdentityServer4.AdminUI.Controllers
             }
 
 
-            Sessionid = id ?? default(int);
+            Sessionid = id ?? default;
             string retrievedName = FetchName(Sessionid);
             RecordNameInSession(retrievedName);
             RecordIdInSession(Sessionid);
@@ -103,7 +103,7 @@ namespace IdentityServer4.AdminUI.Controllers
             {
                 return NotFound();
             }
-            Sessionid = id ?? default(int);
+            Sessionid = id ?? default;
             string retrievedName = FetchName(Sessionid);
 
             RecordNameInSession(retrievedName);

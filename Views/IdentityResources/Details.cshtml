@@ -1,7 +1,8 @@
 ﻿@model IdentityServer4.AdminUI.Models.IdentityResources
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Details";
+    var IdentityName = IdentityServer4.AdminUI.Helpers.VarHelper.IdentityName;
+    var IdentityId = IdentityServer4.AdminUI.Helpers.VarHelper.IdentityId;
 }
 <hr />
 @* Details table. *@
@@ -9,9 +10,9 @@
     <div class="card-header">
         <i></i>
         <h2>Resource Details for: </h2>
-        <h2>    @Context.Session.GetString("IdentityResourceName")</h2>
+        <h2>    @Context.Session.GetString(IdentityName)</h2>
         <hr />
-        <form asp-controller="IdentityClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("IdentityResourceId")">
+        <form asp-controller="IdentityClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(IdentityId)">
             <input type="submit" value="Claims" class="btn btn-info" />
         </form>
         @* Below are the buttons at the top of the details page table *@

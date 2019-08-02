@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<IdentityServer4.AdminUI.Models.IdentityClaims>
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Index";
+    var IdentityName = IdentityServer4.AdminUI.Helpers.VarHelper.IdentityName;
 }
 
 <title>Identity Claims</title>
@@ -12,7 +12,7 @@
     <div class="card-header">
         <i></i>
         <h2>Identity claims</h2>
-        <h2>    @Context.Session.GetString("IdentityResourceName")</h2>
+        <h2>    @Context.Session.GetString(IdentityName)</h2>
         <hr />
         @* Below are the buttons at the top of the Index page table *@
 

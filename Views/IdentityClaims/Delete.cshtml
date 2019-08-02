@@ -1,14 +1,14 @@
 ﻿@model IdentityServer4.AdminUI.Models.IdentityClaims
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Delete";
+    var IdentityName = IdentityServer4.AdminUI.Helpers.VarHelper.IdentityName;
 }
 
 
 <h3>Are you sure you want to delete this?</h3>
 @* Display for delete information *@
 <div>
-    <h4>@Context.Session.GetString("IdentityResourceName")</h4>
+    <h4>@Context.Session.GetString(IdentityName)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
