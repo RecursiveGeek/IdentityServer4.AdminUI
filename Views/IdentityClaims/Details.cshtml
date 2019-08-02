@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = "Details";
+    var temp = IdentityServer4.AdminUI.Helpers.VarHelper.IdentityName;
 }
 <hr />
 
@@ -10,7 +11,7 @@
     <div class="card-header">
         <i></i>
         <h2>Claims Details for: </h2>
-        <h2>    @Context.Session.GetString("IdentityResourceName")</h2>
+        <h2>    @Context.Session.GetString(temp)</h2>
         <hr />
         @* Below are the buttons at the top of the details page table *@
     </div>

@@ -14,6 +14,7 @@ namespace IdentityServer4.AdminUI.Controllers
         private readonly IdentityServer4AdminUIContext _context;
         string name = "default";
         #endregion
+
         #region constuctor
         public ApiScopesController(IdentityServer4AdminUIContext context)
         {

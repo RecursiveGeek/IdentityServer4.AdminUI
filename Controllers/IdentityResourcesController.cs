@@ -14,6 +14,7 @@ namespace IdentityServer4.AdminUI.Controllers
         const string SessionKey = "FirstSeen";
         public int Sessionid;
         #endregion
+
         #region constructor
         public IdentityResourcesController(IdentityServer4AdminUIContext context)
         {

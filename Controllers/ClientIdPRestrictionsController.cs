@@ -13,13 +13,15 @@ namespace IdentityServer4.AdminUI.Controllers
         private readonly IdentityServer4AdminUIContext _context;
         public string name = " default";
         #endregion
-        #region constructor
+
+        #region Constructors
         public ClientIdPRestrictionsController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
-        #region methods
+
+        #region Methods
         // GET: ClientIdPRestrictions
         public async Task<IActionResult> Index(string searchString, string name)
         {

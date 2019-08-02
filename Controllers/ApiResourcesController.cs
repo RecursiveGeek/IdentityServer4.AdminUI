@@ -30,17 +30,19 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(await _context.ApiResources.ToListAsync());
         }
 
-        // GET: ApiResources/Details/5
         /// <summary>
         /// checks for existing resource, also sets the session states
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Identity collumn</param>
         /// <returns>apiresources/details/"id"</returns>
+        /// <remarks>
+        /// Example GET: ApiResources/Details/5
+        /// </remarks>
         public async Task<IActionResult> Details(int? id)
         {
 
             Sessionid = id ?? default(int);
-            string retrievedName = FetchName(Sessionid);
+            var retrievedName = FetchName(Sessionid);
             RecordNameInSession(retrievedName);
             RecordIdInSession(Sessionid);
 
