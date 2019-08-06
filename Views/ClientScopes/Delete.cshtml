@@ -1,14 +1,14 @@
 ﻿@model IdentityServer4.AdminUI.Models.ClientScopes
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "scope";
+    var ClientName = IdentityServer4.AdminUI.Helpers.VarHelper.ClientName;
 }
 <title>Scope - Delete</title>
 <hr />
 
 @* Display for delete information *@
 <h3>Are you sure you want to delete this?</h3>
-<h2>    @Context.Session.GetString("name")</h2>
+<h2>    @Context.Session.GetString(ClientName)</h2>
 <div>
     <hr />
     <dl class="dl-horizontal">

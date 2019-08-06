@@ -1,25 +1,26 @@
 ﻿@model IdentityServer4.AdminUI.Models.ApiSecrets
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Edit";
+    var ApiResourceName = IdentityServer4.AdminUI.Helpers.VarHelper.ApiResourceName;
+    var ApiResourceId = IdentityServer4.AdminUI.Helpers.VarHelper.ApiResourceId;
 }
 <h1 class=" = text-danger">
     @ViewBag.error
 </h1>
 <title>Api Secrets-Edit</title>
 <h2>Edit</h2>
-<h4>@Context.Session.GetString("ApiResourceName")</h4>
+<h4>@Context.Session.GetString(ApiResourceName)</h4>
 <h4>ApiSecrets</h4>
 <hr />
 @* Edit Form (to be posted) *@
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit" asp-route-searchString=" @Context.Session.GetInt32("ApiResourceId")">
+        <form asp-action="Edit" asp-route-searchString=" @Context.Session.GetInt32(ApiResourceId)">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="ApiResourceId" class="control-label"></label>
-                <input asp-for="ApiResourceId" readonly class="form-control" id=" @Context.Session.GetInt32("ApiResourceId")" value="@Context.Session.GetInt32("ApiResourceId")" />
+                <input asp-for="ApiResourceId" readonly class="form-control" id=" @Context.Session.GetInt32(ApiResourceId)" value="@Context.Session.GetInt32(ApiResourceId)" />
                 <span asp-validation-for="ApiResourceId" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -28,7 +28,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns> ScopeClaims/Index </returns>
         public async Task<IActionResult> Index(string searchString, string name)
         {
-            if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString("ApiScopeName")))
+            if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ApiScopeName)))
             {
                 return View(Helpers.VarHelper.error404);
             }
@@ -37,12 +37,12 @@ namespace IdentityServer4.AdminUI.Controllers
 
             if (!string.IsNullOrEmpty(name))
             {
-                HttpContext.Session.SetString("ApiScopeName", this.name);
+                HttpContext.Session.SetString(Helpers.VarHelper.ApiScopeName, this.name);
             }
-            else if (string.IsNullOrEmpty(HttpContext.Session.GetString("ApiScopeName")))
+            else if (string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ApiScopeName)))
             {
                 this.name = "null/empty";
-                HttpContext.Session.SetString("ApiScopeName", this.name);
+                HttpContext.Session.SetString(Helpers.VarHelper.ApiScopeName, this.name);
             }
 
             // this sets up our variable client to get the instances of our clients
@@ -54,7 +54,7 @@ namespace IdentityServer4.AdminUI.Controllers
                 // converts teh search string to an int to perform the search function. 
                 int id = int.Parse(searchString);
                 client = client.Where(s => s.ApiScopeId.Equals(id));
-                HttpContext.Session.SetInt32("ApiScopeId", id);
+                HttpContext.Session.SetInt32(Helpers.VarHelper.ApiScopeId, id);
             }
             else
             {
@@ -231,8 +231,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>the id from the session state. </returns>
         public int GetSessionId()
         {
-            int x = HttpContext.Session.GetInt32("ApiScopeId") ?? default;
-            return x;
+            return HttpContext.Session.GetInt32(Helpers.VarHelper.ApiScopeId) ?? default;
         }
     }
 }

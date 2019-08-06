@@ -1,11 +1,11 @@
 ﻿@model IdentityServer4.AdminUI.Models.ApiScopeClaims
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Edit";
+    var ApiResourceName = IdentityServer4.AdminUI.Helpers.VarHelper.ApiResourceName;
 }
 <title>ApiScopeClaims-Edit</title>
 <h2>Edit</h2>
-<h4>@Context.Session.GetString("name")</h4>
+<h4>@Context.Session.GetString(ApiResourceName)</h4>
 <h4>ApiScopeClaims</h4>
 @* Edit Form (to be posted) *@
 <hr />

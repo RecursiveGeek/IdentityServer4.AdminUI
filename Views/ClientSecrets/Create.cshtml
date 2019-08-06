@@ -1,7 +1,8 @@
 ﻿@model IdentityServer4.AdminUI.Models.ClientSecrets
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Create";
+    var ClientName = IdentityServer4.AdminUI.Helpers.VarHelper.ClientName;
+    var ClientId = IdentityServer4.AdminUI.Helpers.VarHelper.ClientId;
 
 }
 <h1 class="text-danger">
@@ -11,7 +12,7 @@
 <title>Secrets - Create</title>
 <h2>Create Secret</h2>
 @* Create form to be  posted *@
-<h2>    @Context.Session.GetString("name")</h2>
+<h2>    @Context.Session.GetString(ClientName)</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,7 +20,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ClientId" class="control-label"></label>
-                <input asp-for="ClientId" readonly class="form-control" id=" @Context.Session.GetInt32("id")" value="@Context.Session.GetInt32("id")" />
+                <input asp-for="ClientId" readonly class="form-control" id=" @Context.Session.GetInt32(ClientId)" value="@Context.Session.GetInt32(ClientId)" />
                 <span asp-validation-for="ClientId" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -1,7 +1,7 @@
 ﻿@model IdentityServer4.AdminUI.Models.IdentityClaims
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Create";
+    var IdentityResourceId = IdentityServer4.AdminUI.Helpers.VarHelper.IdentityId;
 }
 
 <h2>Create</h2>
@@ -14,8 +14,8 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="IdentityResourceId" class="control-label"></label>
-                <input asp-for="IdentityResourceId" class="form-control" />
+                <label asp-for="IdentityResourceId" class="control-label">
+                </label><input asp-for="IdentityResourceId" readonly class="form-control" id=" @Context.Session.GetInt32(IdentityResourceId)" value="@Context.Session.GetInt32(IdentityResourceId)" />
                 <span asp-validation-for="IdentityResourceId" class="text-danger"></span>
             </div>
             <div class="form-group">

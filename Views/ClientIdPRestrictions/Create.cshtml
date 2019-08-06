@@ -1,7 +1,7 @@
 ﻿@model IdentityServer4.AdminUI.Models.ClientIdPRestrictions
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Create";
+    var ClientId = IdentityServer4.AdminUI.Helpers.VarHelper.ClientId;
 }
 <title>IdPRestrictions - Create</title>
 <h2>Create IdPRestrictions</h2>
@@ -13,7 +13,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ClientId" class="control-label"></label>
-                <input asp-for="ClientId" readonly class="form-control" id=" @Context.Session.GetInt32("id")" value="@Context.Session.GetInt32("id")" />
+                <input asp-for="ClientId" readonly class="form-control" id=" @Context.Session.GetInt32(ClientId)" value="@Context.Session.GetInt32(ClientId)" />
                 <span asp-validation-for="ClientId" class="text-danger"></span>
             </div>
             <div class="form-group">

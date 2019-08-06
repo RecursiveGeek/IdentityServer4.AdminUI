@@ -1,7 +1,7 @@
 ﻿@model IdentityServer4.AdminUI.Models.ApiClaims
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Delete";
+       var ApiResourceName = IdentityServer4.AdminUI.Helpers.VarHelper.ApiResourceName;
 }
 <title>ApiClaims-Delete</title>
 
@@ -10,7 +10,7 @@
 @* Display for delete information *@
 <div>
     <h4>ApiClaims</h4>
-    <h4>@Context.Session.GetString("ApiResourceName")</h4>
+    <h4>@Context.Session.GetString(ApiResourceName)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>

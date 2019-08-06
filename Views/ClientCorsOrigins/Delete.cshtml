@@ -1,7 +1,7 @@
 ﻿@model IdentityServer4.AdminUI.Models.ClientCorsOrigins
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Delete";
+   var ClientName = IdentityServer4.AdminUI.Helpers.VarHelper.ClientName;
 }
 
 <title>Origin - Delete</title>
@@ -9,7 +9,7 @@
 
 @* Display for delete information *@
 <h3>Are you sure you want to delete this?</h3>
-<h2>    @Context.Session.GetString("name")</h2>
+<h2>    @Context.Session.GetString(ClientName)</h2>
 <div>
     <hr />
     <dl class="dl-horizontal">

@@ -1,7 +1,8 @@
 ﻿@model IdentityServer4.AdminUI.Models.ClientCorsOrigins
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Details";
+    var ClientName = IdentityServer4.AdminUI.Helpers.VarHelper.ClientName;
+    var ClientId = IdentityServer4.AdminUI.Helpers.VarHelper.ClientId;
 }
 <title>Origin - Details</title>
 <hr />
@@ -11,53 +12,53 @@
     <div class="card-header">
         <i></i>
         <h2>Client Cors Origins Details for:</h2>
-        <h2>    @Context.Session.GetString("name")</h2>
+        <h2>    @Context.Session.GetString(ClientName)</h2>
         <hr />
         @* Below are the buttons at the top of the details page table *@
         <div class="form-inline">
 
-            <form asp-controller="ClientSecrets" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+            <form asp-controller="ClientSecrets" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(ClientId)">
 
                 <input type="submit" value="Secrets" class="btn btn-outline-warning" />
 
             </form>
 
-            <form asp-controller="ClientClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+            <form asp-controller="ClientClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(ClientId)">
 
                 <input type="submit" value="Claims" class="btn btn-outline-warning" />
 
             </form>
-            <form asp-controller="ClientCorsOrigins" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+            <form asp-controller="ClientCorsOrigins" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(ClientId)">
 
                 <input type="submit" value="Cors Origins" class="btn btn-outline-primary" />
 
             </form>
-            <form asp-controller="ClientGrantTypes" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+            <form asp-controller="ClientGrantTypes" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(ClientId)">
 
                 <input type="submit" value="Grant Types" class="btn btn-outline-warning" />
 
             </form>
-            <form asp-controller="ClientIdPRestrictions" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+            <form asp-controller="ClientIdPRestrictions" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(ClientId)">
 
                 <input type="submit" value="Id PRestrictions" class="btn btn-outline-warning" />
 
             </form>
-            <form asp-controller="ClientPostLogoutRedirectUris" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+            <form asp-controller="ClientPostLogoutRedirectUris" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(ClientId)">
 
                 <input type="submit" value="Post Logout Redirect Uris" class="btn btn-outline-warning" />
 
             </form>
-            <form asp-controller="ClientProperties" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+            <form asp-controller="ClientProperties" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(ClientId)">
 
                 <input type="submit" value="Properties" class="btn btn-outline-warning" />
 
             </form>
-            <form asp-controller="ClientRedirectUris" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+            <form asp-controller="ClientRedirectUris" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(ClientId)">
 
                 <input type="submit" value="Redirect Uris" class="btn btn-outline-warning" />
 
             </form>
-            <form asp-controller="ClientScopes" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("id")">
+            <form asp-controller="ClientScopes" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(ClientId)">
 
                 <input type="submit" value="Scopes" class="btn btn-outline-warning" />
 

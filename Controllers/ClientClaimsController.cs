@@ -30,7 +30,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>This returns a filtered index page based upon the client id.</returns>
         public async Task<IActionResult> Index(string searchString, string name)
         {
-            if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString("name")))
+            if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ClientName)))
             {
                 return View(Helpers.VarHelper.error404);
             }
@@ -39,12 +39,12 @@ namespace IdentityServer4.AdminUI.Controllers
 
             if (!string.IsNullOrEmpty(name))
             {
-                HttpContext.Session.SetString("name", this.name);
+                HttpContext.Session.SetString(Helpers.VarHelper.ClientName, this.name);
             }
-            else if (string.IsNullOrEmpty(HttpContext.Session.GetString("name")))
+            else if (string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ClientName)))
             {
                 this.name = "null/empty";
-                HttpContext.Session.SetString("name", this.name);
+                HttpContext.Session.SetString(Helpers.VarHelper.ClientName, this.name);
             }
 
             // this sets up our variable client to get the instances of our clients
@@ -56,7 +56,7 @@ namespace IdentityServer4.AdminUI.Controllers
                 // converts teh search string to an int to perform the search function. 
                 int id = int.Parse(searchString);
                 client = client.Where(s => s.ClientId.Equals(id));
-                HttpContext.Session.SetInt32("id", id);
+                HttpContext.Session.SetInt32(Helpers.VarHelper.ClientId, id);
             }
             else
             {
@@ -97,7 +97,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>clientclaims/create</returns>
         public IActionResult Create()
         {
-            if (HttpContext.Session.GetInt32("id") == 0 || HttpContext.Session.GetInt32("id") == null)
+            if (HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) == null)
             {
                 return View(Helpers.VarHelper.error404);
             }
@@ -231,7 +231,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>currentl id stored in the session state</returns>
         public int GetSessionId()
         {
-            int x = HttpContext.Session.GetInt32("id") ?? default;
+            int x = HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) ?? default;
             return x;
         }
         #endregion

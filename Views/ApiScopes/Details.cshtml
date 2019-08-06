@@ -1,7 +1,10 @@
 ﻿@model IdentityServer4.AdminUI.Models.ApiScopes
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Details";
+    var ApiResourceName = IdentityServer4.AdminUI.Helpers.VarHelper.ApiResourceName;
+    var ApiScopeName = IdentityServer4.AdminUI.Helpers.VarHelper.ApiScopeName;
+    var ApiResourceId = IdentityServer4.AdminUI.Helpers.VarHelper.ApiResourceId;
+    var ApiScopeId = IdentityServer4.AdminUI.Helpers.VarHelper.ApiScopeId;
 }
 <title>ApiScopes-Details</title>
 <hr />
@@ -10,28 +13,28 @@
     <div class="card-header">
         <i></i>
         <h2>Api Scope Details for: </h2>
-        <h2>    @Context.Session.GetString("ApiResourceName") : </h2>
-        <h2>    @Context.Session.GetString("ApiScopeName")</h2>
+        <h2>    @Context.Session.GetString(ApiResourceName) : </h2>
+        <h2>    @Context.Session.GetString(ApiScopeName)</h2>
         <hr />
         @* Below are the buttons at the top of the details page table *@
         <div class="form-inline">
-            <form asp-controller="ApiSecrets" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("ApiId")">
+            <form asp-controller="ApiSecrets" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(ApiResourceId)">
 
                 <input type="submit" value="Secrets" class="btn btn-outline-warning" />
 
             </form>
 
-            <form asp-controller="ApiClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("ApiId")">
+            <form asp-controller="ApiClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(ApiResourceId)">
 
                 <input type="submit" value="Claims" class="btn btn-outline-warning" />
 
             </form>
-            <form asp-controller="ApiScopes" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("ApiId")">
+            <form asp-controller="ApiScopes" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(ApiResourceId)">
 
                 <input type="submit" value="Scopes" class="btn btn-outline-primary" />
 
             </form>
-            <form asp-controller="ApiScopeClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32("ApiScopeId")">
+            <form asp-controller="ApiScopeClaims" asp-action="Index" asp-route-searchString=" @Context.Session.GetInt32(ApiScopeId)">
 
                 <input type="submit" value="ScopeClaims" class="btn btn-outline-warning" />
 

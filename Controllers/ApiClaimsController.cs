@@ -31,7 +31,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>api claims index page</returns>
         public async Task<IActionResult> Index(string searchString, string name)
         {
-            if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString("ApiResourceName")))
+            if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ApiResourceName)))
             {
                 return View(Helpers.VarHelper.error404);
             }
@@ -40,12 +40,12 @@ namespace IdentityServer4.AdminUI.Controllers
 
             if (!string.IsNullOrEmpty(name))
             {
-                HttpContext.Session.SetString("ApiResourceName", this.name);
+                HttpContext.Session.SetString(Helpers.VarHelper.ApiResourceName, this.name);
             }
-            else if (string.IsNullOrEmpty(HttpContext.Session.GetString("ApiResourceName")))
+            else if (string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ApiResourceName)))
             {
                 this.name = "null/empty";
-                HttpContext.Session.SetString("ApiResourceName", this.name);
+                HttpContext.Session.SetString(Helpers.VarHelper.ApiResourceName, this.name);
             }
 
             // this sets up our variable client to get the instances of our clients
@@ -57,7 +57,7 @@ namespace IdentityServer4.AdminUI.Controllers
                 // converts teh search string to an int to perform the search function. 
                 int id = int.Parse(searchString);
                 client = client.Where(s => s.ApiResourceId.Equals(id));
-                HttpContext.Session.SetInt32("ApiResourceId", id);
+                HttpContext.Session.SetInt32(Helpers.VarHelper.ApiResourceId, id);
             }
             else
             {
@@ -232,7 +232,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>the id stored in the session state</returns>
         public int GetSessionId()
         {
-            return HttpContext.Session.GetInt32("ApiResourceId") ?? default;
+            return HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) ?? default;
         }
         #endregion
     }

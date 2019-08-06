@@ -253,7 +253,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <param name="action"></param>
         private void RecordNameInSession(string action)
         {
-            HttpContext.Session.SetString("name", action);
+            HttpContext.Session.SetString(Helpers.VarHelper.ClientName, action);
         }
         // this records the last used id
         /// <summary>
@@ -262,7 +262,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <param name="action"></param>
         private void RecordIdInSession(int action)
         {
-            HttpContext.Session.SetInt32("id", action);
+            HttpContext.Session.SetInt32(Helpers.VarHelper.ClientId, action);
         }
 
 

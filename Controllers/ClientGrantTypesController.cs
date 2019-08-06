@@ -25,7 +25,7 @@ namespace IdentityServer4.AdminUI.Controllers
         {
             // If checks if there is no variables passed and nothing in the session state. 
             // if all of those are empty, it returns a 404 message and redirects the user bacl to the main clients page. 
-            if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString("name")))
+            if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ClientName)))
             {
                 return View(Helpers.VarHelper.error404);
             }
@@ -35,12 +35,12 @@ namespace IdentityServer4.AdminUI.Controllers
             // this is to prevent errors that sometimes occured. 
             if (!string.IsNullOrEmpty(name))
             {
-                HttpContext.Session.SetString("name", this.name);
+                HttpContext.Session.SetString(Helpers.VarHelper.ClientName, this.name);
             }
-            else if (string.IsNullOrEmpty(HttpContext.Session.GetString("name")))
+            else if (string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ClientName)))
             {
                 this.name = "null/empty";
-                HttpContext.Session.SetString("name", this.name);
+                HttpContext.Session.SetString(Helpers.VarHelper.ClientName, this.name);
             }
 
             // this sets up our variable client to get the instances of our clients
@@ -51,7 +51,7 @@ namespace IdentityServer4.AdminUI.Controllers
             {
                 int id = int.Parse(searchString);
                 client = client.Where(s => s.ClientId.Equals(id));
-                HttpContext.Session.SetInt32("id", id);
+                HttpContext.Session.SetInt32(Helpers.VarHelper.ClientId, id);
             }
             else
             {
@@ -84,7 +84,7 @@ namespace IdentityServer4.AdminUI.Controllers
         // GET: ClientGrantTypes/Create
         public IActionResult Create()
         {
-            if (HttpContext.Session.GetInt32("id") == 0 || HttpContext.Session.GetInt32("id") == null)
+            if (HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) == null)
             {
                 return View(Helpers.VarHelper.error404);
             }
@@ -198,7 +198,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>int of the current clients table id</returns>
         public int GetSessionId()
         {
-            int x = HttpContext.Session.GetInt32("id") ?? default;
+            int x = HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) ?? default;
             return x;
         }
         #endregion

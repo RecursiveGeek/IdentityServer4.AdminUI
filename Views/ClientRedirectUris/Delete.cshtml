@@ -1,7 +1,7 @@
 ﻿@model IdentityServer4.AdminUI.Models.ClientRedirectUris
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Delete";
+    var ClientName = IdentityServer4.AdminUI.Helpers.VarHelper.ClientName;
 }
 <title>RedirectUri-Delete</title>
 
@@ -9,7 +9,7 @@
 
 @* Display for delete information *@
 <div>
-    <h4>@Context.Session.GetString("name")</h4>
+    <h4>@Context.Session.GetString(ClientName)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>

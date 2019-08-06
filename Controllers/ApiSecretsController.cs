@@ -31,7 +31,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>apisecrets/index</returns>
         public async Task<IActionResult> Index(string searchString, string name)
         {
-            if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString("ApiResourceName")))
+            if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ApiResourceName)))
             {
                 return View(Helpers.VarHelper.error404);
             }
@@ -40,12 +40,12 @@ namespace IdentityServer4.AdminUI.Controllers
 
             if (!string.IsNullOrEmpty(name))
             {
-                HttpContext.Session.SetString("ApiResourceName", this.name);
+                HttpContext.Session.SetString(Helpers.VarHelper.ApiResourceName, this.name);
             }
-            else if (string.IsNullOrEmpty(HttpContext.Session.GetString("ApiResourceName")))
+            else if (string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ApiResourceName)))
             {
                 this.name = "null/empty";
-                HttpContext.Session.SetString("ApiResourceName", this.name);
+                HttpContext.Session.SetString(Helpers.VarHelper.ApiResourceName, this.name);
             }
 
             // this sets up our variable client to get the instances of our clients
@@ -57,7 +57,7 @@ namespace IdentityServer4.AdminUI.Controllers
                 // converts the search string to an int to perform the search function. 
                 int id = int.Parse(searchString);
                 client = client.Where(s => s.ApiResourceId.Equals(id));
-                HttpContext.Session.SetInt32("ApiResourceId", id);
+                HttpContext.Session.SetInt32(Helpers.VarHelper.ApiResourceId, id);
             }
             else
             {
@@ -100,7 +100,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns></returns>
         public IActionResult Create()
         {
-            if (HttpContext.Session.GetInt32("ApiResourceId") == 0 || HttpContext.Session.GetInt32("ApiResourceId") == null)
+            if (HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == null)
             {
                 return View(Helpers.VarHelper.error404);
             }
@@ -272,8 +272,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>int </returns>
         public int GetSessionId()
         {
-            int x = HttpContext.Session.GetInt32("ApiResourceId") ?? default;
-            return x;
+            return HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) ?? default;
         }
         #endregion
     }

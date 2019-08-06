@@ -1,7 +1,7 @@
 ﻿@model IdentityServer4.AdminUI.Models.ApiScopeClaims
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Create";
+    var ApiScopeId = IdentityServer4.AdminUI.Helpers.VarHelper.ApiScopeId;
 }
 
 <h2>Create</h2>
@@ -15,7 +15,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ApiScopeId" class="control-label"></label>
-                <input asp-for="ApiScopeId" readonly class="form-control" id=" @Context.Session.GetInt32("ApiScopeId")" value="@Context.Session.GetInt32("ApiScopeId")" />
+                <input asp-for="ApiScopeId" readonly class="form-control" id=" @Context.Session.GetInt32(ApiScopeId)" value="@Context.Session.GetInt32(ApiScopeId)" />
                 <span asp-validation-for="ApiScopeId" class="text-danger"></span>
             </div>
             <div class="form-group">
