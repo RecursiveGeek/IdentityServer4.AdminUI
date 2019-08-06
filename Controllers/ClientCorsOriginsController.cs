@@ -9,17 +9,19 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class ClientCorsOriginsController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
         public string name = " default";
         #endregion
-        #region constructor
+
+        #region Constructors
         public ClientCorsOriginsController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
-        #region methods
+
+        #region Methods
         /// <summary>
         /// indexpage for client cors origins
         /// </summary>

@@ -9,17 +9,19 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class ClientScopesController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
         public string name = " default";
         #endregion
-        #region construcor
+
+        #region Construcors
         public ClientScopesController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
-        #region methods
+
+        #region Methods
         // GET: ClientScopes
         public async Task<IActionResult> Index(string searchString, string name)
         {

@@ -9,33 +9,22 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class IdentityResourcesController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
-        const string SessionKey = "FirstSeen";
         public int Sessionid;
         #endregion
 
-        #region constructor
+        #region Constructors
         public IdentityResourcesController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
-        #region methods
+
+        #region Methods
         // GET: IdentityResources
         public async Task<IActionResult> Index(string searchString)
         {
-            // sets the variable value to the current session key.
-            var value = HttpContext.Session.GetString(SessionKey);
-            // if there is not value currently set, it sets to the id passed to the index as a string.
-            if (string.IsNullOrEmpty(value))
-            {
-                if (string.IsNullOrEmpty(searchString))
-                {
-                    searchString = " ";
-                }
-                HttpContext.Session.SetString(SessionKey, searchString);
-            }
             // this sets up our variable client to get the instances of our clients
             var client = from m in _context.IdentityResources
                          select m;
@@ -61,9 +50,11 @@ namespace IdentityServer4.AdminUI.Controllers
 
             Sessionid = id ?? default;
             string retrievedName = FetchName(Sessionid);
-            RecordNameInSession(retrievedName);
+            if (!string.IsNullOrEmpty(retrievedName))
+            {
+                RecordNameInSession(retrievedName);
+            }
             RecordIdInSession(Sessionid);
-            HttpContext.Session.SetString(SessionKey, retrievedName);
 
 
             var identityResources = await _context.IdentityResources
@@ -106,7 +97,10 @@ namespace IdentityServer4.AdminUI.Controllers
             Sessionid = id ?? default;
             string retrievedName = FetchName(Sessionid);
 
-            RecordNameInSession(retrievedName);
+            if (!string.IsNullOrEmpty(retrievedName))
+            {
+                RecordNameInSession(retrievedName);
+            }
             RecordIdInSession(Sessionid);
             var identityResources = await _context.IdentityResources.FindAsync(id);
             if (identityResources == null)
@@ -152,10 +146,13 @@ namespace IdentityServer4.AdminUI.Controllers
         // GET: IdentityResources/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            Sessionid = id ?? default(int);
+            Sessionid = id ?? default;
             string retrievedName = FetchName(Sessionid);
 
-            RecordNameInSession(retrievedName);
+            if (!string.IsNullOrEmpty(retrievedName))
+            {
+                RecordNameInSession(retrievedName);
+            }
             RecordIdInSession(Sessionid);
             if (id == null)
             {

@@ -9,19 +9,19 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class IdentityClaimsController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
         public string name = " default";
         #endregion
 
-        #region constructor
+        #region Constructors
         public IdentityClaimsController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
 
-        #region methods
+        #region Methods
         // GET: IdentityClaims
         public async Task<IActionResult> Index(string searchString, string name)
         {
@@ -81,6 +81,10 @@ namespace IdentityServer4.AdminUI.Controllers
         // GET: IdentityClaims/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetInt32(Helpers.VarHelper.IdentityId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.IdentityId) == null)
+            {
+                return View(Helpers.VarHelper.error404);
+            }
             return View();
         }
 

@@ -9,17 +9,19 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class ClientClaimsController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
         public string name = " default";
         #endregion
-        #region constructor
+
+        #region Constructors
         public ClientClaimsController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
-        #region methods
+
+        #region Methods
         /// <summary>
         /// Cliend claims index page, the session states are used for tracking the name and id across pages
         /// the paramaters passed to this function assist in filtering the page to only display relevant claims

@@ -9,17 +9,19 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class ClientGrantTypesController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
         public string name = " default";
         #endregion
-        #region constructor
+
+        #region Constructors
         public ClientGrantTypesController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
-        #region methods
+
+        #region Methods
         // GET: ClientGrantTypes
         public async Task<IActionResult> Index(string searchString, string name)
         {

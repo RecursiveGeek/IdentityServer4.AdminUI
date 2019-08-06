@@ -9,15 +9,19 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class ApiScopeClaimsController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
         string name = "default";
         #endregion
+
+        #region Constructors
         public ApiScopeClaimsController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
+        #endregion
 
+        #region Methods
         // GET: ApiScopeClaims
         /// <summary>
         /// paramaters are used to filter the relevant scope claims
@@ -96,6 +100,10 @@ namespace IdentityServer4.AdminUI.Controllers
         // GET: ApiScopeClaims/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == null)
+            {
+                return View(Helpers.VarHelper.error404);
+            }
             return View();
         }
 
@@ -233,5 +241,7 @@ namespace IdentityServer4.AdminUI.Controllers
         {
             return HttpContext.Session.GetInt32(Helpers.VarHelper.ApiScopeId) ?? default;
         }
+        #endregion
+
     }
 }

@@ -10,18 +10,19 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class ClientSecretsController : Controller
     {
-        #region fields
+        #region Fields
         public string name = " default";
-        const string SessionKey = "FirstSeen";
         private readonly IdentityServer4AdminUIContext _context;
         #endregion
-        #region constructor
+
+        #region Constructors
         public ClientSecretsController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
-        #region methods
+
+        #region Methods
         // GET: ClientSecrets
         public async Task<IActionResult> Index(string searchString, string name)
         {
@@ -65,12 +66,10 @@ namespace IdentityServer4.AdminUI.Controllers
         // GET: ClientSecrets/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            name = HttpContext.Session.GetString(SessionKey);
             if (id == null)
             {
                 return NotFound();
             }
-
             var clientSecrets = await _context.ClientSecrets
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (clientSecrets == null)

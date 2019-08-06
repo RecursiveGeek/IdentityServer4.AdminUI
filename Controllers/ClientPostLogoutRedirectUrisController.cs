@@ -9,17 +9,19 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class ClientPostLogoutRedirectUrisController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
         public string name = " default";
         #endregion
-        #region constructor
+
+        #region Constructors
         public ClientPostLogoutRedirectUrisController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
-        #region methods
+
+        #region Methods
         // GET: ClientPostLogoutRedirectUris
         public async Task<IActionResult> Index(string searchString, string name)
         {

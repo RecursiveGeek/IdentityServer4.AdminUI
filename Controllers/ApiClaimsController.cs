@@ -9,16 +9,18 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class ApiClaimsController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
         string name = "default";
         #endregion
-        #region Constructor
+
+        #region Constructors
         public ApiClaimsController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
+
         #region Methods
         // GET: ApiClaims
         /// <summary>
@@ -97,6 +99,10 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>/apiclaims/create</returns>
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == null)
+            {
+                return View(Helpers.VarHelper.error404);
+            }
             return View();
         }
 

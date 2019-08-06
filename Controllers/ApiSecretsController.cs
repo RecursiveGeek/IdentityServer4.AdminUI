@@ -10,18 +10,17 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class ApiSecretsController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
         string name = "default";
-        const string SessionKey = "FirstSeen";
         #endregion
-        #region constructor
+        #region Constructors
         public ApiSecretsController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
-        #region methods
+        #region Methods
         // GET: ApiSecrets
         /// <summary>
         /// parameters filter the secrets accordingly.
@@ -35,9 +34,7 @@ namespace IdentityServer4.AdminUI.Controllers
             {
                 return View(Helpers.VarHelper.error404);
             }
-
             this.name = name;
-
             if (!string.IsNullOrEmpty(name))
             {
                 HttpContext.Session.SetString(Helpers.VarHelper.ApiResourceName, this.name);
@@ -63,12 +60,9 @@ namespace IdentityServer4.AdminUI.Controllers
             {
                 client = client.Where(s => s.ApiResourceId.Equals(GetSessionId()));
             }
-
             // returns an update with our clints that we searched. 
             return View(await client.ToListAsync());
         }
-
-
         // GET: ApiSecrets/Details/5
         /// <summary>
         /// secret details view
@@ -77,7 +71,6 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>/apisecrets/details/"#"</returns>
         public async Task<IActionResult> Details(int? id)
         {
-            name = HttpContext.Session.GetString(SessionKey);
             if (id == null)
             {
                 return NotFound();
@@ -231,14 +224,12 @@ namespace IdentityServer4.AdminUI.Controllers
             {
                 return NotFound();
             }
-
             var apiSecrets = await _context.ApiSecrets
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (apiSecrets == null)
             {
                 return NotFound();
             }
-
             return View(apiSecrets);
         }
 

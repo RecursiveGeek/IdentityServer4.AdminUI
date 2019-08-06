@@ -11,18 +11,19 @@ namespace IdentityServer4.AdminUI.Controllers
     
     public class ClientsController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
-        const string SessionKey = "FirstSeen";
         public int Sessionid;
         #endregion
-        #region constructor
+
+        #region Constructors
         public ClientsController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
-        #region methods
+
+        #region Methods
         /// <summary>
         /// will filter clients by search string. 
         /// sets up base session state. 
@@ -31,19 +32,6 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>Main Clients page</returns>
         public async Task<IActionResult> Index(string searchString)
         {
-            
-            // sets the variable value to the current session key.
-            var value = HttpContext.Session.GetString(SessionKey);
-            // if there is not value currently set, it sets to the id passed to the index as a string.
-            if (string.IsNullOrEmpty(value))
-            {
-                if (string.IsNullOrEmpty(searchString)) {
-                    searchString = " ";
-                }
-                HttpContext.Session.SetString(SessionKey, searchString);
-            }
-          
-
             // this sets up our variable client to get the instances of our clients
             var client = from m in _context.Clients
                          select m;
@@ -52,9 +40,6 @@ namespace IdentityServer4.AdminUI.Controllers
             {
                 client = client.Where(s => s.ClientName.Contains(searchString));
             }
-
-
-
             // returns an update with our clints that we searched. 
             return View(await client.ToListAsync());
         }
@@ -83,17 +68,14 @@ namespace IdentityServer4.AdminUI.Controllers
             {
                 return PageNotFound();
             }
-
-            Sessionid = id ?? default(int);
+            Sessionid = id ?? default;
             string retrievedName = FetchName(Sessionid);
-            RecordNameInSession(retrievedName);
-            RecordIdInSession(Sessionid);
-            HttpContext.Session.SetString(SessionKey, retrievedName);
-           
-            if (clients == null)
+            if (string.IsNullOrEmpty(retrievedName))
             {
-                return NotFound();
+                retrievedName = " ";
             }
+            RecordIdInSession(Sessionid);
+            RecordNameInSession(retrievedName);
 
             return View(clients);
         }
@@ -135,10 +117,13 @@ namespace IdentityServer4.AdminUI.Controllers
         // GET: Clients/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            Sessionid = id ?? default(int);
+            Sessionid = id ?? default;
             string retrievedName = FetchName(Sessionid);
 
-            RecordNameInSession(retrievedName);
+            if (!string.IsNullOrEmpty(retrievedName))
+            {
+                RecordNameInSession(retrievedName);
+            }
             RecordIdInSession(Sessionid);
             if (id == null)
             {
@@ -200,10 +185,13 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>confirm delete page</returns>
         public async Task<IActionResult> Delete(int? id)
         {
-            Sessionid = id ?? default(int);
+            Sessionid = id ?? default;
             string retrievedName = FetchName(Sessionid);
 
-            RecordNameInSession(retrievedName);
+            if (!string.IsNullOrEmpty(retrievedName))
+            {
+                RecordNameInSession(retrievedName);
+            }
             RecordIdInSession(Sessionid);
 
             if (id == null)

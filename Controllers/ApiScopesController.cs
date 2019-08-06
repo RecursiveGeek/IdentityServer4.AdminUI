@@ -82,7 +82,7 @@ namespace IdentityServer4.AdminUI.Controllers
             }
 
             // below sets up the session states for navigating to the scopes claims pages. 
-            var ScopeId = id ?? default(int);
+            var ScopeId = id ?? default;
             var ScopeName = FetchName(ScopeId);
             HttpContext.Session.SetString(Helpers.VarHelper.ApiScopeName, ScopeName);
             HttpContext.Session.SetInt32(Helpers.VarHelper.ApiScopeId, ScopeId);
@@ -104,6 +104,10 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>apiScopes/create</returns>
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == null)
+            {
+                return View(Helpers.VarHelper.error404);
+            }
             return View();
         }
 

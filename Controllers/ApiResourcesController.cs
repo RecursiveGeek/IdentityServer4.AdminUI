@@ -9,17 +9,19 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class ApiResourcesController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
         public int Sessionid;
         #endregion
-        #region constructors
+
+        #region Constructors
         public ApiResourcesController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
-        #region methods
+
+        #region Methods
         // GET: ApiResources
         /// <summary>
         /// displays the main api resources page.
@@ -41,9 +43,12 @@ namespace IdentityServer4.AdminUI.Controllers
         public async Task<IActionResult> Details(int? id)
         {
 
-            Sessionid = id ?? default(int);
+            Sessionid = id ?? default;
             var retrievedName = FetchName(Sessionid);
-            RecordNameInSession(retrievedName);
+            if (!string.IsNullOrEmpty(retrievedName))
+            {
+                RecordNameInSession(retrievedName);
+            }
             RecordIdInSession(Sessionid);
 
             if (id == null)
@@ -98,7 +103,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns> /apiresources/edit </returns>
         public async Task<IActionResult> Edit(int? id)
         {
-            Sessionid = id ?? default(int);
+            Sessionid = id ?? default;
             string retrievedName = FetchName(Sessionid);
             if (!string.IsNullOrEmpty(retrievedName))
             {
@@ -168,7 +173,7 @@ namespace IdentityServer4.AdminUI.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
 
-            Sessionid = id ?? default(int);
+            Sessionid = id ?? default;
             string retrievedName = FetchName(Sessionid);
             if (!string.IsNullOrEmpty(retrievedName))
             {
@@ -223,18 +228,9 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>the display name of the client at id "x"</returns>
         public string FetchName(int id)
         {
-            ApiResources Name = GetClients(id);
+            ApiResources Name = _context.ApiResources.Find(id);
 
             return Name.DisplayName;
-        }
-        /// <summary>
-        /// returns the ApiResource object associated with id "#"
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>an apiresources object</returns>
-        public ApiResources GetClients(int id)
-        {
-            return _context.ApiResources.Find(id);
         }
         // attempt: set the client name
         /// <summary>

@@ -9,7 +9,7 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class ClientIdPRestrictionsController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
         public string name = " default";
         #endregion

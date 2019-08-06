@@ -5,10 +5,11 @@ namespace IdentityServer4.AdminUI.Models
 {
     public static class ConfigurationManager
     {
-        #region field
+        #region Fields
         public static IConfiguration AppSetting { get; }
         #endregion
-        #region constructor
+
+        #region Constructors
         static ConfigurationManager()
         {
             AppSetting = new ConfigurationBuilder()
