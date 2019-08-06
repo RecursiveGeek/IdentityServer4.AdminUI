@@ -225,14 +225,14 @@ namespace IdentityServer4.AdminUI.Controllers
         /// retrieves the name
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>the display name of the client at id "x"</returns>
+        /// <returns>the display name at id "x"</returns>
         public string FetchName(int id)
         {
             ApiResources Name = _context.ApiResources.Find(id);
 
             return Name.DisplayName;
         }
-        // attempt: set the client name
+        // attempt: records the name on session
         /// <summary>
         /// This is the method to set the sname in the session. 
         /// </summary>

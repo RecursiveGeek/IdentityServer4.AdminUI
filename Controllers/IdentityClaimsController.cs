@@ -42,23 +42,22 @@ namespace IdentityServer4.AdminUI.Controllers
                 HttpContext.Session.SetString(Helpers.VarHelper.IdentityName, this.name);
             }
 
-            // this sets up our variable client to get the instances of our clients
-            var client = from m in _context.IdentityClaims
+            var claim = from m in _context.IdentityClaims
                          select m;
 
             if (!string.IsNullOrEmpty(searchString))
             {
                 int id = int.Parse(searchString);
-                client = client.Where(s => s.IdentityResourceId.Equals(id));
+                claim = claim.Where(s => s.IdentityResourceId.Equals(id));
                 HttpContext.Session.SetInt32(Helpers.VarHelper.IdentityId, id);
             }
             else
             {
-                client = client.Where(s => s.IdentityResourceId.Equals(GetSessionId()));
+                claim = claim.Where(s => s.IdentityResourceId.Equals(GetSessionId()));
             }
 
             // returns an update with our clints that we searched. 
-            return View(await client.ToListAsync());
+            return View(await claim.ToListAsync());
         }
         // GET: IdentityClaims/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -191,11 +190,10 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <summary>
         /// returns the id stored in the session state, this is used for setting up the filter applied in the index
         /// </summary>
-        /// <returns>int of the current clients table id</returns>
+        /// <returns>int of the current id</returns>
         public int GetSessionId()
         {
-            int x = HttpContext.Session.GetInt32(Helpers.VarHelper.IdentityId) ?? default;
-            return x;
+            return HttpContext.Session.GetInt32(Helpers.VarHelper.IdentityId) ?? default;
         }
         #endregion
     }

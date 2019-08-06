@@ -49,24 +49,23 @@ namespace IdentityServer4.AdminUI.Controllers
                 HttpContext.Session.SetString(Helpers.VarHelper.ApiScopeName, this.name);
             }
 
-            // this sets up our variable client to get the instances of our clients
-            var client = from m in _context.ApiScopeClaims
+            var claim = from m in _context.ApiScopeClaims
                          select m;
 
             if (!string.IsNullOrEmpty(searchString))
             {
                 // converts teh search string to an int to perform the search function. 
                 int id = int.Parse(searchString);
-                client = client.Where(s => s.ApiScopeId.Equals(id));
+                claim = claim.Where(s => s.ApiScopeId.Equals(id));
                 HttpContext.Session.SetInt32(Helpers.VarHelper.ApiScopeId, id);
             }
             else
             {
-                client = client.Where(s => s.ApiScopeId.Equals(GetSessionId()));
+                claim = claim.Where(s => s.ApiScopeId.Equals(GetSessionId()));
             }
 
             // returns an update with our clints that we searched. 
-            return View(await client.ToListAsync());
+            return View(await claim.ToListAsync());
         }
 
 

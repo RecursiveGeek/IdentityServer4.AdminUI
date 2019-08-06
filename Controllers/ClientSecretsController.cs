@@ -220,9 +220,9 @@ namespace IdentityServer4.AdminUI.Controllers
         /// returns the id stored in the session state, this is used for setting up the filter applied in the index
         /// </summary>
         /// <returns>int of the current clients table id</returns>
-        public int GetSessionId() {
-            int x = HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) ?? default;
-            return x;
+        public int GetSessionId()
+        {
+            return HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) ?? default;
         }
         #endregion
     }

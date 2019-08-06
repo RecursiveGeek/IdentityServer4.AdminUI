@@ -45,23 +45,22 @@ namespace IdentityServer4.AdminUI.Controllers
                 HttpContext.Session.SetString(Helpers.VarHelper.ApiResourceName, this.name);
             }
 
-            // this sets up our variable client to get the instances of our clients
-            var client = from m in _context.ApiSecrets
+            var secret = from m in _context.ApiSecrets
                          select m;
 
             if (!string.IsNullOrEmpty(searchString))
             {
                 // converts the search string to an int to perform the search function. 
                 int id = int.Parse(searchString);
-                client = client.Where(s => s.ApiResourceId.Equals(id));
+                secret = secret.Where(s => s.ApiResourceId.Equals(id));
                 HttpContext.Session.SetInt32(Helpers.VarHelper.ApiResourceId, id);
             }
             else
             {
-                client = client.Where(s => s.ApiResourceId.Equals(GetSessionId()));
+                secret = secret.Where(s => s.ApiResourceId.Equals(GetSessionId()));
             }
             // returns an update with our clints that we searched. 
-            return View(await client.ToListAsync());
+            return View(await secret.ToListAsync());
         }
         // GET: ApiSecrets/Details/5
         /// <summary>

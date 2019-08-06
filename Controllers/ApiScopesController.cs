@@ -48,24 +48,23 @@ namespace IdentityServer4.AdminUI.Controllers
                 HttpContext.Session.SetString(Helpers.VarHelper.ApiResourceName, this.name);
             }
 
-            // this sets up our variable client to get the instances of our clients
-            var client = from m in _context.ApiScopes
+            var scope = from m in _context.ApiScopes
                          select m;
 
             if (!string.IsNullOrEmpty(searchString))
             {
                 // converts teh search string to an int to perform the search function. 
                 int id = int.Parse(searchString);
-                client = client.Where(s => s.ApiResourceId.Equals(id));
+                scope = scope.Where(s => s.ApiResourceId.Equals(id));
                 HttpContext.Session.SetInt32(Helpers.VarHelper.ApiResourceId, id);
             }
             else
             {
-                client = client.Where(s => s.ApiResourceId.Equals(GetSessionId()));
+                scope = scope.Where(s => s.ApiResourceId.Equals(GetSessionId()));
             }
 
             // returns an update with our clints that we searched. 
-            return View(await client.ToListAsync());
+            return View(await scope.ToListAsync());
         }
 
         // GET: ApiScopes/Details/5

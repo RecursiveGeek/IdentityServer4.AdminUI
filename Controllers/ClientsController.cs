@@ -262,19 +262,9 @@ namespace IdentityServer4.AdminUI.Controllers
 
         public string FetchName(int id)
         {
-            Clients Name = getClients(id);
+            Clients Name = _context.Clients.Find(id);
 
             return Name.ClientName;
-        }
-        /// <summary>
-        ///  This returns a client object when you pass the id
-        ///  input id for client => get the client object
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns> client@(id) </returns>
-        public Clients getClients(int id)
-        {
-            return _context.Clients.Find(id);
         }
         #endregion
 

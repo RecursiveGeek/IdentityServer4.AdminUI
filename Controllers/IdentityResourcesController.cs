@@ -25,18 +25,15 @@ namespace IdentityServer4.AdminUI.Controllers
         // GET: IdentityResources
         public async Task<IActionResult> Index(string searchString)
         {
-            // this sets up our variable client to get the instances of our clients
-            var client = from m in _context.IdentityResources
+            var Identity = from m in _context.IdentityResources
                          select m;
-            // 
             if (!string.IsNullOrEmpty(searchString))
             {
-                client = client.Where(s => s.DisplayName.Contains(searchString));
+                Identity = Identity.Where(s => s.DisplayName.Contains(searchString));
             }
 
             // returns an update with our clints that we searched. 
-            return View(await client.ToListAsync());
-
+            return View(await Identity.ToListAsync());
         }
 
         // GET: IdentityResources/Details/5
@@ -46,7 +43,6 @@ namespace IdentityServer4.AdminUI.Controllers
             {
                 return NotFound();
             }
-
 
             Sessionid = id ?? default;
             string retrievedName = FetchName(Sessionid);
@@ -195,19 +191,11 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>"#".displayname</returns>
         public string FetchName(int id)
         {
-            IdentityResources Name = GetClients(id);
+            IdentityResources Name = _context.IdentityResources.Find(id);
             return Name.DisplayName;
         }
-        /// <summary>
-        /// this returns the identity resource that is at location "#" on the table. 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>identity resource # "#"</returns>
-        public IdentityResources GetClients(int id)
-        {
-            return _context.IdentityResources.Find(id);
-        }
-        // attempt: set the client name
+
+        // attempt: set the name in session.
         /// <summary>
         /// This sets the display name into the identity session state. 
         /// </summary>

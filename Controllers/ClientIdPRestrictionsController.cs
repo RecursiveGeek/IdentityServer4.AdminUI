@@ -197,8 +197,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>int of the current clients table id</returns>
         public int GetSessionId()
         {
-            int x = HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) ?? default;
-            return x;
+            return HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) ?? default;
         }
         #endregion
     }

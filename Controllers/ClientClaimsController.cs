@@ -233,8 +233,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>currentl id stored in the session state</returns>
         public int GetSessionId()
         {
-            int x = HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) ?? default;
-            return x;
+            return HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) ?? default;
         }
         #endregion
     }
