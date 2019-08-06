@@ -100,7 +100,10 @@ namespace IdentityServer4.AdminUI.Controllers
         {
             Sessionid = id ?? default(int);
             string retrievedName = FetchName(Sessionid);
-            RecordNameInSession(retrievedName);
+            if (!string.IsNullOrEmpty(retrievedName))
+            {
+                RecordNameInSession(retrievedName);
+            }
             RecordIdInSession(Sessionid);
 
             if (id == null)
@@ -167,7 +170,10 @@ namespace IdentityServer4.AdminUI.Controllers
 
             Sessionid = id ?? default(int);
             string retrievedName = FetchName(Sessionid);
-            RecordNameInSession(retrievedName);
+            if (!string.IsNullOrEmpty(retrievedName))
+            {
+                RecordNameInSession(retrievedName);
+            }
             RecordIdInSession(Sessionid);
 
             if (id == null)
