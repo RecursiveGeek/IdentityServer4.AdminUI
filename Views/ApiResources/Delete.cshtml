@@ -36,15 +36,16 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
-
-
-    @* Post delete and navigation buttons. *@
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-info" />
-    </form>
-    <hr />
-    <form asp-action="/Index">
-        <input type="submit" value="Back to Resources" class="btn btn-info" />
-    </form>
+    <hr/>
+    <div class="form-inline">
+        @* Post delete and navigation buttons. *@
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Delete" class="btn btn-info" />
+        </form>
+        &nbsp;<i class="fas fa-square-full fa-xs fa-rotate-90"></i>&nbsp;
+        <form asp-action="/Index">
+            <input type="submit" value="Back to Resources" class="btn btn-info" />
+        </form>
+    </div>
 </div>

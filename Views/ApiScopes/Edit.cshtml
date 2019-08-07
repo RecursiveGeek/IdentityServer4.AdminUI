@@ -55,8 +55,14 @@
                     </label>
                 </div>
             </div>
-            <div class="form-group">
+            <hr />
+            <div class="form-inline">
                 <input type="submit" value="Save" class="btn btn-info" />
+                &nbsp;<i class="fas fa-square-full fa-xs fa-rotate-90"></i>&nbsp;
+                @*This is the button to trigger the modal below.*@
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#Confirm_Leave">
+                    Back to Scopes
+                </button>
             </div>
         </form>
     </div>
@@ -67,10 +73,6 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
-@*This is the button to trigger the modal below.*@
-<button type="button" class="btn btn-info" data-toggle="modal" data-target="#Confirm_Leave">
-    Back to Scopes
-</button>
 
 @* Modal window *@
 <div class="modal fade" id="Confirm_Leave" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
