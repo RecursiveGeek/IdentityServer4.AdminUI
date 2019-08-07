@@ -1,6 +1,10 @@
 ﻿@model IdentityServer4.AdminUI.Models.ApiClaims
 @using Microsoft.AspNetCore.Http;
-<title>ApiClaims-Create</title>
+@{
+    var ApiResourceId = IdentityServer4.AdminUI.Helpers.VarHelper.ApiResourceId;
+}
+<title>Api-Claims-Create</title>
+
 <h2>Create</h2>
 
 <h4>Api Claims</h4>
@@ -12,7 +16,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ApiResourceId" class="control-label"></label>
-                <input asp-for="ApiResourceId" class="form-control" />
+                <input asp-for="ApiResourceId" readonly class="form-control" id=" @Context.Session.GetInt32(ApiResourceId)" value="@Context.Session.GetInt32(ApiResourceId)" />
                 <span asp-validation-for="ApiResourceId" class="text-danger"></span>
             </div>
             <div class="form-group">

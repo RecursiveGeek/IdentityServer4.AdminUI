@@ -3,7 +3,8 @@
 @{
     var ClientId = IdentityServer4.AdminUI.Helpers.VarHelper.ClientId;
 }
-<title>Scope - Create</title>
+    <title>Client-Scope-Create</title>
+
 <h2>Create Scope</h2>
 @* Create form to be  posted *@
 <hr />
@@ -36,7 +37,7 @@
 }
 @*This is the button to trigger the modal below.*@
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#Confirm_Leave">
-    Back to Secrets
+    Back to Scopes
 </button>
 
 @* Modal window *@
@@ -55,7 +56,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
                 <form asp-action="/Index">
-                    <input type="submit" value="Back to Secrets" class="btn btn-info" />
+                    <input type="submit" value="Back to Scopes" class="btn btn-info" />
                 </form>
                 <form asp-controller="Clients" asp-action="Index">
 

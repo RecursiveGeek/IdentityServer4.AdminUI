@@ -4,7 +4,7 @@
     var ClientName = IdentityServer4.AdminUI.Helpers.VarHelper.ClientName;
     var ClientId = IdentityServer4.AdminUI.Helpers.VarHelper.ClientId;
 }
-<title>Scopes- details</title>
+    <title>Client-Scopes-details</title>
 <hr />
 
 @* Details table. *@
@@ -119,9 +119,9 @@
 @* Page Navigation buttons. *@
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id"><input type="submit" value="Edit" class="btn btn-info" /></a>
-    <i class="fas fa-circle fa-xs fa-rotate-90"></i>
+    <i class="fas fa-square fa-xs fa-rotate-90"></i>
     <a asp-action="Index"><input type="submit" value=" Back to scopes" class="btn btn-info" /></a>
-    <i class="fas fa-circle fa-xs fa-rotate-90"></i>
+    <i class="fas fa-square fa-xs fa-rotate-90"></i>
     <a asp-controller="Clients" asp-action="Index">
 
         <input type="submit" value=" Back to Clients" class="btn btn-info" />
