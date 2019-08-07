@@ -50,7 +50,7 @@ namespace IdentityServer4.AdminUI.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 // converts the search string to an int to perform the search function. 
-                int id = int.Parse(searchString);
+                var id = int.Parse(searchString);
                 client = client.Where(s => s.ClientId.Equals(id));
                 HttpContext.Session.SetInt32(Helpers.VarHelper.ClientId, id);
             }

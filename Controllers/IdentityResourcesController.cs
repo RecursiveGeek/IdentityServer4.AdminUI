@@ -45,7 +45,7 @@ namespace IdentityServer4.AdminUI.Controllers
             }
 
             Sessionid = id ?? default;
-            string retrievedName = FetchName(Sessionid);
+            var retrievedName = FetchName(Sessionid);
             if (!string.IsNullOrEmpty(retrievedName))
             {
                 RecordNameInSession(retrievedName);
@@ -91,7 +91,7 @@ namespace IdentityServer4.AdminUI.Controllers
                 return NotFound();
             }
             Sessionid = id ?? default;
-            string retrievedName = FetchName(Sessionid);
+            var retrievedName = FetchName(Sessionid);
 
             if (!string.IsNullOrEmpty(retrievedName))
             {
@@ -143,7 +143,7 @@ namespace IdentityServer4.AdminUI.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             Sessionid = id ?? default;
-            string retrievedName = FetchName(Sessionid);
+            var retrievedName = FetchName(Sessionid);
 
             if (!string.IsNullOrEmpty(retrievedName))
             {

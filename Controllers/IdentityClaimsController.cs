@@ -47,7 +47,7 @@ namespace IdentityServer4.AdminUI.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                int id = int.Parse(searchString);
+                var id = int.Parse(searchString);
                 claim = claim.Where(s => s.IdentityResourceId.Equals(id));
                 HttpContext.Session.SetInt32(Helpers.VarHelper.IdentityId, id);
             }

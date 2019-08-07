@@ -10,7 +10,7 @@ namespace IdentityServer4.AdminUI.Models
             var Delimiter = ConfigurationManager.AppSetting["Custom:Delimiter"];
             var GrantType = ConfigurationManager.AppSetting["Custom:GrantTypes"];
             var array = GrantType.Split(Delimiter);
-            for (int i = 0; i < array.Length; i++)
+            for (var i = 0; i < array.Length; i++)
             {
                 Add(array[i]);
             }

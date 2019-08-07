@@ -55,7 +55,7 @@ namespace IdentityServer4.AdminUI.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 // converts teh search string to an int to perform the search function. 
-                int id = int.Parse(searchString);
+                var id = int.Parse(searchString);
                 claim = claim.Where(s => s.ApiScopeId.Equals(id));
                 HttpContext.Session.SetInt32(Helpers.VarHelper.ApiScopeId, id);
             }

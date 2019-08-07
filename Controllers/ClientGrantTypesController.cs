@@ -51,7 +51,7 @@ namespace IdentityServer4.AdminUI.Controllers
             // this is where we apply the search string filter to the view. 
             if (!string.IsNullOrEmpty(searchString))
             {
-                int id = int.Parse(searchString);
+                var id = int.Parse(searchString);
                 client = client.Where(s => s.ClientId.Equals(id));
                 HttpContext.Session.SetInt32(Helpers.VarHelper.ClientId, id);
             }

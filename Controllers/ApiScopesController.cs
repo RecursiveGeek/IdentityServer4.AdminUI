@@ -10,18 +10,19 @@ namespace IdentityServer4.AdminUI.Controllers
 {
     public class ApiScopesController : Controller
     {
-        #region fields
+        #region Fields
         private readonly IdentityServer4AdminUIContext _context;
         string name = "default";
         #endregion
 
-        #region constuctor
+        #region Constuctors
         public ApiScopesController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
-        #region methods
+
+        #region Methods
         // GET: ApiScopes
         /// <summary>
         /// paramaters apply the filter for the page, sets up the session states. 
@@ -54,7 +55,7 @@ namespace IdentityServer4.AdminUI.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 // converts teh search string to an int to perform the search function. 
-                int id = int.Parse(searchString);
+                var id = int.Parse(searchString);
                 scope = scope.Where(s => s.ApiResourceId.Equals(id));
                 HttpContext.Session.SetInt32(Helpers.VarHelper.ApiResourceId, id);
             }
@@ -242,8 +243,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns>session id int. </returns>
         public int GetSessionId()
         {
-            int x = HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) ?? default;
-            return x;
+            return HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) ?? default; ;
         }
         /// <summary>
         /// retrieves the name from the session

@@ -14,12 +14,14 @@ namespace IdentityServer4.AdminUI.Controllers
         private readonly IdentityServer4AdminUIContext _context;
         string name = "default";
         #endregion
+
         #region Constructors
         public ApiSecretsController(IdentityServer4AdminUIContext context)
         {
             _context = context;
         }
         #endregion
+
         #region Methods
         // GET: ApiSecrets
         /// <summary>
@@ -51,7 +53,7 @@ namespace IdentityServer4.AdminUI.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 // converts the search string to an int to perform the search function. 
-                int id = int.Parse(searchString);
+                var id = int.Parse(searchString);
                 secret = secret.Where(s => s.ApiResourceId.Equals(id));
                 HttpContext.Session.SetInt32(Helpers.VarHelper.ApiResourceId, id);
             }

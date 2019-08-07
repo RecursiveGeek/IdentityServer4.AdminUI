@@ -104,7 +104,7 @@ namespace IdentityServer4.AdminUI.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             Sessionid = id ?? default;
-            string retrievedName = FetchName(Sessionid);
+            var retrievedName = FetchName(Sessionid);
             if (!string.IsNullOrEmpty(retrievedName))
             {
                 RecordNameInSession(retrievedName);
@@ -174,7 +174,7 @@ namespace IdentityServer4.AdminUI.Controllers
         {
 
             Sessionid = id ?? default;
-            string retrievedName = FetchName(Sessionid);
+            var retrievedName = FetchName(Sessionid);
             if (!string.IsNullOrEmpty(retrievedName))
             {
                 RecordNameInSession(retrievedName);
