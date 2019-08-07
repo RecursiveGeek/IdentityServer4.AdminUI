@@ -5,7 +5,7 @@ namespace IdentityServer4.AdminUI.Models
 {
     public class IdentityServer4AdminUIContext : DbContext
     {
-        public IdentityServer4AdminUIContext (DbContextOptions<IdentityServer4AdminUIContext> options)
+        public IdentityServer4AdminUIContext(DbContextOptions<IdentityServer4AdminUIContext> options)
             : base(options)
         {
         }
@@ -44,7 +44,7 @@ namespace IdentityServer4.AdminUI.Models
 
         public DbSet<IdentityServer4.AdminUI.Models.IdentityClaims> IdentityClaims { get; set; }
 
-       
+
 
 
     }

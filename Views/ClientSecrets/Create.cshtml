@@ -6,16 +6,17 @@
 
 }
 
-<title>Client-Secrets-Create</title>
-
 <h1 class="text-danger">
     @ViewBag.error
 </h1>
+<title>Client-Secrets-Create</title>
 
+<hr />
 <h2>Create Secret</h2>
-@* Create form to be  posted *@
 <h2>    @Context.Session.GetString(ClientName)</h2>
 <hr />
+
+@* Create form to be  posted *@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">

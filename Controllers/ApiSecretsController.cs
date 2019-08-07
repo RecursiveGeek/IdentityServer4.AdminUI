@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using IdentityModel;
 using IdentityServer4.AdminUI.Models;
 using Microsoft.AspNetCore.Http;
-using IdentityModel;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace IdentityServer4.AdminUI.Controllers
 {
@@ -119,7 +119,7 @@ namespace IdentityServer4.AdminUI.Controllers
                 ViewBag.error = "Please enter a Value for: 'Api Secret'";
                 return View();
             }
-            if (confirmPassword!=apiSecrets.Value)
+            if (confirmPassword != apiSecrets.Value)
             {
                 ViewBag.error = "Secret fields do not match";
                 return View();
@@ -171,7 +171,7 @@ namespace IdentityServer4.AdminUI.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ApiResourceId,Description,Expiration,Type,Value")] ApiSecrets apiSecrets, string OldHash,string confirmPassword)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ApiResourceId,Description,Expiration,Type,Value")] ApiSecrets apiSecrets, string OldHash, string confirmPassword)
         {
             if (id != apiSecrets.Id)
             {
@@ -179,10 +179,10 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             if (ModelState.IsValid)
             {
-                if (confirmPassword!= apiSecrets.Value)
+                if (confirmPassword != apiSecrets.Value)
                 {
                     ViewBag.error = "secret values do not match";
-                        return View();
+                    return View();
                 }
                 if (string.IsNullOrEmpty(apiSecrets.Value))
                 {

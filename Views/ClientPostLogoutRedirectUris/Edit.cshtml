@@ -1,17 +1,18 @@
 ﻿@model IdentityServer4.AdminUI.Models.ClientPostLogoutRedirectUris
 @using Microsoft.AspNetCore.Http;
 @{
-   var ClientName = IdentityServer4.AdminUI.Helpers.VarHelper.ClientName;
-   var ClientId = IdentityServer4.AdminUI.Helpers.VarHelper.ClientId;
+    var ClientName = IdentityServer4.AdminUI.Helpers.VarHelper.ClientName;
+    var ClientId = IdentityServer4.AdminUI.Helpers.VarHelper.ClientId;
 }
 
-    <title>Client-PostLogoutRedirectUri-Edit</title>
+<title>Client-PostLogoutRedirectUri-Edit</title>
 
 <hr />
 <h2>Edit - PostLogoutRedirectUri</h2>
 <h2>    @Context.Session.GetString(ClientName)</h2>
-@* Edit Form (to be posted) *@
 <hr />
+
+@* Edit Form (to be posted) *@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">

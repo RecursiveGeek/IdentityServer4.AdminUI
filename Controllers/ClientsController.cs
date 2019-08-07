@@ -1,14 +1,14 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using IdentityServer4.AdminUI.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using IdentityServer4.AdminUI.Models;
-using Microsoft.AspNetCore.Http;
+using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace IdentityServer4.AdminUI.Controllers
 {
-    
+
     public class ClientsController : Controller
     {
         #region Fields
@@ -47,7 +47,8 @@ namespace IdentityServer4.AdminUI.Controllers
         /// Occurs when traversing to an invalid url
         /// </summary>
         /// <returns> 404 page not found view </returns>
-        public IActionResult PageNotFound() {
+        public IActionResult PageNotFound()
+        {
 
             return View(Helpers.VarHelper.error404);
 
@@ -64,7 +65,7 @@ namespace IdentityServer4.AdminUI.Controllers
             var clients = await _context.Clients
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (id == null||clients == null)
+            if (id == null || clients == null)
             {
                 return PageNotFound();
             }
@@ -103,7 +104,7 @@ namespace IdentityServer4.AdminUI.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(clients);
-               await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(clients);
@@ -148,7 +149,7 @@ namespace IdentityServer4.AdminUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,AbsoluteRefreshTokenLifetime,AccessTokenLifetime,AccessTokenType,AllowAccessTokensViaBrowser,AllowOfflineAccess,AllowPlainTextPkce,AllowRememberConsent,AlwaysIncludeUserClaimsInIdToken,AlwaysSendClientClaims,AuthorizationCodeLifetime,BackChannelLogoutSessionRequired,BackChannelLogoutUri,ClientClaimsPrefix,ClientId,ClientName,ClientUri,ConsentLifetime,Description,EnableLocalLogin,Enabled,FrontChannelLogoutSessionRequired,FrontChannelLogoutUri,IdentityTokenLifetime,IncludeJwtId,LogoUri,PairWiseSubjectSalt,ProtocolType,RefreshTokenExpiration,RefreshTokenUsage,RequireClientSecret,RequireConsent,RequirePkce,SlidingRefreshTokenLifetime,UpdateAccessTokenClaimsOnRefresh")] Clients clients)
         {
-            
+
             if (id != clients.Id)
             {
                 return NotFound();

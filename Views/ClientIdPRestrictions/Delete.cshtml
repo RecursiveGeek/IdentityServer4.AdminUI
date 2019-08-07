@@ -1,15 +1,17 @@
 ﻿@model IdentityServer4.AdminUI.Models.ClientIdPRestrictions
 @using Microsoft.AspNetCore.Http;
 @{
-   var ClientName = IdentityServer4.AdminUI.Helpers.VarHelper.ClientName;
+    var ClientName = IdentityServer4.AdminUI.Helpers.VarHelper.ClientName;
 }
-    <title>Client-IdPRestrictions-Delete</title>
+<title>Client-IdPRestrictions-Delete</title>
+
 <hr />
-<h3>Are you sure you want to delete this?</h3>
+<h2>Are you sure you want to delete this?</h2>
 <h2>    @Context.Session.GetString(ClientName)</h2>
+<hr />
+
+@* Display for delete information *@
 <div>
-    @* Display for delete information *@
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ClientId)
@@ -40,4 +42,4 @@
             <input type="submit" value=" Back to Clients" class="btn btn-info" />
         </form>
     </div>
-    </div>
+</div>

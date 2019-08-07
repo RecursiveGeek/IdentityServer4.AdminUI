@@ -1,6 +1,6 @@
-﻿using System.Diagnostics;
+﻿using IdentityServer4.AdminUI.Models;
 using Microsoft.AspNetCore.Mvc;
-using IdentityServer4.AdminUI.Models;
+using System.Diagnostics;
 
 namespace IdentityServer4.AdminUI.Controllers
 {

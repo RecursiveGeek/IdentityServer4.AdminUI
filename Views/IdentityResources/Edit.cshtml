@@ -1,14 +1,16 @@
 ﻿@model IdentityServer4.AdminUI.Models.IdentityResources
 @using Microsoft.AspNetCore.Http;
-
+@{
+    var IdentityName = IdentityServer4.AdminUI.Helpers.VarHelper.IdentityName;
+}
 <title>Identity-Resources-Edit</title>
 
-
-<h2>Edit</h2>
-
-<h4>Identity resources</h4>
-@* Edit Form (to be posted) *@
 <hr />
+<h2>Edit- Identity Resources</h2>
+<h2>@Context.Session.GetString(IdentityName)</h2>
+<hr />
+
+@* Edit Form (to be posted) *@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">

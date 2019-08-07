@@ -5,11 +5,13 @@
 }
 <title> Client-Claims-Delete</title>
 
+<hr />
+<h2>Are you sure you want to delete this?</h2>
+<h2>@Context.Session.GetString(ClientName)</h2>
+<hr />
+
 @* Display for delete information *@
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>@Context.Session.GetString(ClientName)</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ClientId)
@@ -30,13 +32,13 @@
             @Html.DisplayFor(model => model.Value)
         </dd>
     </dl>
-    <hr/>
+    <hr />
     <div class="form-check-inline">
         @* Post delete and navigation buttons. *@
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id" />
             <input type="submit" value="Delete" class="btn btn-info" />
-        </form>      
+        </form>
         &nbsp;<i class="fas fa-square-full fa-xs fa-rotate-90"></i>&nbsp;
         <form asp-action="/Index">
             <input type="submit" value="Back to Claims" class="btn btn-info" />

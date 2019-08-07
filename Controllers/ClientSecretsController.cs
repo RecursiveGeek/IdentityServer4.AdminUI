@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using IdentityModel;
 using IdentityServer4.AdminUI.Models;
 using Microsoft.AspNetCore.Http;
-using IdentityModel;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace IdentityServer4.AdminUI.Controllers
 {
@@ -93,7 +93,7 @@ namespace IdentityServer4.AdminUI.Controllers
         // POST: ClientSecrets/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClientId,Description,Expiration,Type,Value")] ClientSecrets clientSecrets,string confirmPassword)
+        public async Task<IActionResult> Create([Bind("Id,ClientId,Description,Expiration,Type,Value")] ClientSecrets clientSecrets, string confirmPassword)
         {
             if (string.IsNullOrEmpty(clientSecrets.Value))
             {
@@ -137,7 +137,7 @@ namespace IdentityServer4.AdminUI.Controllers
         // POST: ClientSecrets/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClientId,Description,Expiration,Type,Value")] ClientSecrets clientSecrets,string OldHash,string confirmPassword)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ClientId,Description,Expiration,Type,Value")] ClientSecrets clientSecrets, string OldHash, string confirmPassword)
         {
             if (id != clientSecrets.Id)
             {
@@ -146,10 +146,10 @@ namespace IdentityServer4.AdminUI.Controllers
 
             if (ModelState.IsValid)
             {
-                if (confirmPassword!= clientSecrets.Value)
+                if (confirmPassword != clientSecrets.Value)
                 {
                     ViewBag.error = "Secret fields do not match";
-                        return View();
+                    return View();
                 }
                 if (string.IsNullOrEmpty(clientSecrets.Value))
                 {

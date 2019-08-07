@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IdentityServer4.AdminUI.Models
 {
-    public class Clients 
+    public class Clients
     {
         #region Properties
         // below are all of the attributes from the clients table 
@@ -52,7 +52,7 @@ namespace IdentityServer4.AdminUI.Models
         [Display(Name = "Description")]
         [StringLength(1000, MinimumLength = 0)]
         public string Description { get; set; }
-        [Display(Name = "Enable Local Login " )]
+        [Display(Name = "Enable Local Login ")]
         public Boolean EnableLocalLogin { get; set; }
         [Display(Name = "Enabled")]
         public Boolean Enabled { get; set; }

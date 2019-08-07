@@ -4,15 +4,16 @@
     var ApiResourceName = IdentityServer4.AdminUI.Helpers.VarHelper.ApiResourceName;
     var ApiResourceId = IdentityServer4.AdminUI.Helpers.VarHelper.ApiResourceId;
 }
-<title>Api-Secrets-Edit</title>
-
 <h1 class=" = text-danger">
     @ViewBag.error
 </h1>
-<h2>Edit</h2>
-<h4>@Context.Session.GetString(ApiResourceName)</h4>
-<h4>ApiSecrets</h4>
+<title>Api-Secrets-Edit</title>
+
 <hr />
+<h2>Edit-ApiSecrets</h2>
+<h2>@Context.Session.GetString(ApiResourceName)</h2>
+<hr />
+
 @* Edit Form (to be posted) *@
 <div class="row">
     <div class="col-md-4">

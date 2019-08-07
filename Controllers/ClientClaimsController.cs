@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using IdentityServer4.AdminUI.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using IdentityServer4.AdminUI.Models;
-using Microsoft.AspNetCore.Http;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace IdentityServer4.AdminUI.Controllers
 {
@@ -116,7 +116,7 @@ namespace IdentityServer4.AdminUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ClientId,Type,Value")] ClientClaims clientClaims)
         {
-           
+
             if (ModelState.IsValid)
             {
                 _context.Add(clientClaims);

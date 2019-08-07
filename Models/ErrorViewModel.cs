@@ -1,5 +1,3 @@
-using System;
-
 namespace IdentityServer4.AdminUI.Models
 {
     public class ErrorViewModel

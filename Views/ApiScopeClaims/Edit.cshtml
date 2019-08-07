@@ -4,11 +4,13 @@
     var ApiResourceName = IdentityServer4.AdminUI.Helpers.VarHelper.ApiResourceName;
 }
 <title>Api-Scope-Claims-Edit</title>
-<h2>Edit</h2>
-<h4>@Context.Session.GetString(ApiResourceName)</h4>
-<h4>ApiScopeClaims</h4>
-@* Edit Form (to be posted) *@
+
 <hr />
+<h2>Edit-ApiScopeClaims</h2>
+<h2>@Context.Session.GetString(ApiResourceName)</h2>
+<hr />
+
+@* Edit Form (to be posted) *@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">

@@ -1,13 +1,16 @@
 ﻿@model IdentityServer4.AdminUI.Models.ApiClaims
 @using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Edit";
+    var ApiResourceName = IdentityServer4.AdminUI.Helpers.VarHelper.ApiResourceName;
 }
 
-<h2>Edit</h2>
 <title>Api-Claims-Edit</title>
-<h4>Api Claims</h4>
+
 <hr />
+<h2>Api Claims</h2>
+<h2>@Context.Session.GetString(ApiResourceName)</h2>
+<hr />
+
 @* Edit forms (to be posted) *@
 <div class="row">
     <div class="col-md-4">

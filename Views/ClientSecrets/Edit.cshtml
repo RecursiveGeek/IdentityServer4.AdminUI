@@ -4,18 +4,17 @@
     var ClientName = IdentityServer4.AdminUI.Helpers.VarHelper.ClientName;
     var ClientId = IdentityServer4.AdminUI.Helpers.VarHelper.ClientId;
 }
-
-<title>Client-Secrets - Edit</title>
-
 <h1 class="text-danger">
     @ViewBag.error
 </h1>
+<title>Client-Secrets - Edit</title>
 
-@* Edit Form (to be posted) *@
 <hr />
 <h2>Edit - Secrets</h2>
-<hr />
 <h2>    @Context.Session.GetString(ClientName)</h2>
+<hr />
+
+@* Edit Form (to be posted) *@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit" asp-route-searchString=" @Context.Session.GetInt32(ClientId)">

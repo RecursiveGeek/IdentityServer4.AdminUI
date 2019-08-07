@@ -14,6 +14,6 @@
         public static string ApiResourceId = Models.ConfigurationManager.AppSetting["Custom:SecretNames:ApiResourceId"];
         public static string ApiScopeName = Models.ConfigurationManager.AppSetting["Custom:SecretNames:ApiScopeName"];
         public static string ApiScopeId = Models.ConfigurationManager.AppSetting["Custom:SecretNames:ApiScopeId"];
-        
+
     }
 }
