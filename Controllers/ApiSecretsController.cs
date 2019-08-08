@@ -23,13 +23,14 @@ namespace IdentityServer4.AdminUI.Controllers
         #endregion
 
         #region Methods
-        // GET: ApiSecrets
         /// <summary>
-        /// parameters filter the secrets accordingly.
+        /// This is the main index page 
+        /// This runs a filter based upon the paramaters to only show the relevant objects
         /// </summary>
-        /// <param name="searchString"></param>
-        /// <param name="name"></param>
-        /// <returns>apisecrets/index</returns>
+        /// <param name="searchString"> The search string inputs the ID of the ApiResources linked to this </param>
+        /// <param name="name"> name will take the name of the ApiResource linked to this </param>
+        /// <returns>index page</returns>
+        /// <example>GET: ApiSecrets</example>
         public async Task<IActionResult> Index(string searchString, string name)
         {
             if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ApiResourceName)))
@@ -64,12 +65,12 @@ namespace IdentityServer4.AdminUI.Controllers
             // returns an update with our clints that we searched. 
             return View(await secret.ToListAsync());
         }
-        // GET: ApiSecrets/Details/5
         /// <summary>
-        /// secret details view
+        /// Displays the view for the Details page 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>/apisecrets/details/"#"</returns>
+        /// <param name="id"> This is the table ID </param>
+        /// <returns>View Details</returns>
+        /// <example>GET: ApiSecrets/Details/5</example>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -87,11 +88,11 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiSecrets);
         }
 
-        // GET: ApiSecrets/Create
         /// <summary>
-        /// the create page for secrets, has a check on the sessions to prevent errors incase of a bookmark. 
+        /// Displays the Create page 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>View Create</returns>
+        /// <example>GET: ApiSecrets/Create</example>
         public IActionResult Create()
         {
             if (HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == null)
@@ -134,13 +135,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiSecrets);
         }
 
-        // GET: ApiSecrets/Edit/5
         /// <summary>
-        /// edit view
-        /// this passes the value of old hash to the page as a viewbag to be compared to for confirmation.
+        /// displays the edit view 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>apisecrets/edit/"#"</returns>
+        /// <param name="id">Item on table to edit</param>
+        /// <returns>Edit view</returns>
+        /// <example>ET: apisecrets/Edit/5</example>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -213,12 +213,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiSecrets);
         }
 
-        // GET: ApiSecrets/Delete/5
         /// <summary>
-        /// delete view
+        /// Displays the Delete Page
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>apisecrets/delete/"#"</returns>
+        /// <param name="id">Location of item on table</param>
+        /// <returns>Delete View</returns>
+        /// <example>  GET: ApiSecrets/Delete/5 </example>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -234,12 +234,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiSecrets);
         }
 
-        // POST: ApiSecrets/Delete/5
         /// <summary>
-        /// delete action, removes from table
+        /// Displays the Delete Page
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>apisecrets index</returns>
+        /// <param name="id">Location of item on table</param>
+        /// <returns>Delete View</returns>
+        /// <example>  GET: ApiSecrets/Delete/5 </example>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -250,18 +250,18 @@ namespace IdentityServer4.AdminUI.Controllers
             return RedirectToAction(nameof(Index));
         }
         /// <summary>
-        /// confirms that the secret exists
+        /// validates if claim exists = true
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">item on table</param>
         /// <returns>boolean</returns>
         private bool ApiSecretsExists(int id)
         {
             return _context.ApiSecrets.Any(e => e.Id == id);
         }
         /// <summary>
-        /// retrieves the id from the session state
+        /// retrieves the relevant id
         /// </summary>
-        /// <returns>int </returns>
+        /// <returns>the id stored in the session state</returns>
         public int GetSessionId()
         {
             return HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) ?? default;

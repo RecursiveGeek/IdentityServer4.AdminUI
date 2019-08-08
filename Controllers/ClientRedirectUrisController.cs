@@ -22,8 +22,14 @@ namespace IdentityServer4.AdminUI.Controllers
         #endregion
 
         #region Methods
-
-        // GET: ClientRedirectUris
+        /// <summary>
+        /// This is the main index page 
+        /// This runs a filter based upon the paramaters to only show the relevant objects
+        /// </summary>
+        /// <param name="searchString"> The search string inputs the ID of the client linked to this </param>
+        /// <param name="name"> name will take the name of the Client linked to this </param>
+        /// <returns>index page</returns>
+        /// <example>GET: ClientRedirectUris</example>
         public async Task<IActionResult> Index(string searchString, string name)
         {
             if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ClientName)))
@@ -62,8 +68,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(await client.ToListAsync());
         }
 
-
-        // GET: ClientRedirectUris/Details/5
+        /// <summary>
+        /// Displays the view for the Details page 
+        /// </summary>
+        /// <param name="id"> This is the table ID </param>
+        /// <returns>View Details</returns>
+        /// <example>GET: ClientRedirectUris/Details/5</example>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -80,8 +90,11 @@ namespace IdentityServer4.AdminUI.Controllers
 
             return View(clientRedirectUris);
         }
-
-        // GET: ClientRedirectUris/Create
+        /// <summary>
+        /// Displays the Create page 
+        /// </summary>
+        /// <returns>View Create</returns>
+        /// <example>GET: ClientRedirectUris/Create</example>
         public IActionResult Create()
         {
             if (HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) == null)
@@ -90,8 +103,12 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             return View();
         }
-
-        // POST: ClientRedirectUris/Create
+        /// <summary>
+        /// create task - saves the create page form information to the table.
+        /// </summary>
+        /// <param name="clientRedirectUris">The object to be saved to the table</param>
+        /// <returns>Saves form to table, then returns to index</returns>
+        /// <example>POST: ClientRedirectUris/Create</example>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ClientId,RedirectUri")] ClientRedirectUris clientRedirectUris)
@@ -104,8 +121,12 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             return View(clientRedirectUris);
         }
-
-        // GET: ClientRedirectUris/Edit/5
+        /// <summary>
+        /// displays the edit view 
+        /// </summary>
+        /// <param name="id">Item on table to edit</param>
+        /// <returns>Edit view</returns>
+        /// <example>ET: ClientRedirectUris/Edit/5</example>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -120,8 +141,13 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             return View(clientRedirectUris);
         }
-
-        // POST: ClientRedirectUris/Edit/5
+        /// <summary>
+        /// Edit task, saves edits. 
+        /// </summary>
+        /// <param name="id">Location of item on table</param>
+        /// <param name="clientRedirectUris">updated object</param>
+        /// <returns>index page after updating table</returns>
+        /// <example> POST: ApiClaims/Edit/5  </example>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ClientId,RedirectUri")] ClientRedirectUris clientRedirectUris)
@@ -153,8 +179,12 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             return View(clientRedirectUris);
         }
-
-        // GET: ClientRedirectUris/Delete/5
+        /// <summary>
+        /// Displays the Delete Page
+        /// </summary>
+        /// <param name="id">Location of item on table</param>
+        /// <returns>Delete View</returns>
+        /// <example>  GET: ClientRedirectUris/Delete/5 </example>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -171,8 +201,12 @@ namespace IdentityServer4.AdminUI.Controllers
 
             return View(clientRedirectUris);
         }
-
-        // POST: ClientRedirectUris/Delete/5
+        /// <summary>
+        /// action to delete from table. 
+        /// </summary>
+        /// <param name="id"> Location of item on table </param>
+        /// <returns>Index with item deleted</returns>
+        /// <example>  POST: ClientRedirectUris/Delete/5</example>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

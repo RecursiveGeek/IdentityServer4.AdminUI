@@ -21,8 +21,15 @@ namespace IdentityServer4.AdminUI.Controllers
         }
         #endregion
 
-        #region Methods
-        // GET: ClientIdPRestrictions
+        #region Methods       
+        /// <summary>
+        /// This is the main index page 
+        /// This runs a filter based upon the paramaters to only show the relevant objects
+        /// </summary>
+        /// <param name="searchString"> The search string inputs the ID of the client linked to this </param>
+        /// <param name="name"> name will take the name of the Client linked to this </param>
+        /// <returns>index page</returns>
+        /// <example>GET: ClientIdPRestrictions</example>
         public async Task<IActionResult> Index(string searchString, string name)
         {
             if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ClientName)))
@@ -61,8 +68,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(await client.ToListAsync());
         }
 
-
-        // GET: ClientIdPRestrictions/Details/5
+        /// <summary>
+        /// Displays the view for the Details page 
+        /// </summary>
+        /// <param name="id"> This is the table ID </param>
+        /// <returns>View Details</returns>
+        /// <example>GET: ClientIdPRestrictions/Details/5</example>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -79,8 +90,11 @@ namespace IdentityServer4.AdminUI.Controllers
 
             return View(clientIdPRestrictions);
         }
-
-        // GET: ClientIdPRestrictions/Create
+        /// <summary>
+        /// Displays the Create page 
+        /// </summary>
+        /// <returns>View Create</returns>
+        /// <example>GET: ClientIdPRestrictions/Create</example>
         public IActionResult Create()
         {
             if (HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) == null)
@@ -89,8 +103,12 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             return View();
         }
-
-        // POST: ClientIdPRestrictions/Create
+        /// <summary>
+        /// create task - saves the create page form information to the table.
+        /// </summary>
+        /// <param name="clientIdPRestrictions">The object to be saved to the table</param>
+        /// <returns>Saves form to table, then returns to index</returns>
+        /// <example>POST: ClientIdPRestrictions/Create</example>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ClientId,Provider")] ClientIdPRestrictions clientIdPRestrictions)
@@ -103,8 +121,12 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             return View(clientIdPRestrictions);
         }
-
-        // GET: ClientIdPRestrictions/Edit/5
+        /// <summary>
+        /// displays the edit view 
+        /// </summary>
+        /// <param name="id">Item on table to edit</param>
+        /// <returns>Edit view</returns>
+        /// <example>ET: ClientIdPRestrictions/Edit/5</example>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -119,8 +141,13 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             return View(clientIdPRestrictions);
         }
-
-        // POST: ClientIdPRestrictions/Edit/5
+        /// <summary>
+        /// Edit task, saves edits. 
+        /// </summary>
+        /// <param name="id">Location of item on table</param>
+        /// <param name="clientIdPRestrictions">updated object</param>
+        /// <returns>index page after updating table</returns>
+        /// <example> POST: ClientIdPRestrictions/Edit/5  </example>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ClientId,Provider")] ClientIdPRestrictions clientIdPRestrictions)
@@ -152,8 +179,12 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             return View(clientIdPRestrictions);
         }
-
-        // GET: ClientIdPRestrictions/Delete/5
+        /// <summary>
+        /// Displays the Delete Page
+        /// </summary>
+        /// <param name="id">Location of item on table</param>
+        /// <returns>Delete View</returns>
+        /// <example>  GET: ClientIdPRestrictions/Delete/5 </example>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -170,8 +201,12 @@ namespace IdentityServer4.AdminUI.Controllers
 
             return View(clientIdPRestrictions);
         }
-
-        // POST: ClientIdPRestrictions/Delete/5
+        /// <summary>
+        /// action to delete from table. 
+        /// </summary>
+        /// <param name="id"> Location of item on table </param>
+        /// <returns>Index with item deleted</returns>
+        /// <example>  POST: ClientIdPRestrictions/Delete/5</example>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -182,19 +217,18 @@ namespace IdentityServer4.AdminUI.Controllers
             return RedirectToAction(nameof(Index));
         }
         /// <summary>
-        /// Checks that there is an object at location "#" on the table. 
+        /// validates if claim exists = true
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">item on table</param>
         /// <returns>boolean</returns>
         private bool ClientIdPRestrictionsExists(int id)
         {
             return _context.ClientIdPRestrictions.Any(e => e.Id == id);
         }
-
         /// <summary>
-        /// returns the id stored in the session state, this is used for setting up the filter applied in the index
+        /// retrieves the relevant id
         /// </summary>
-        /// <returns>int of the current clients table id</returns>
+        /// <returns>the id stored in the session state</returns>
         public int GetSessionId()
         {
             return HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) ?? default;

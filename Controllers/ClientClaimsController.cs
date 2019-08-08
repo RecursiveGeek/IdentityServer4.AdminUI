@@ -23,13 +23,13 @@ namespace IdentityServer4.AdminUI.Controllers
 
         #region Methods
         /// <summary>
-        /// Cliend claims index page, the session states are used for tracking the name and id across pages
-        /// the paramaters passed to this function assist in filtering the page to only display relevant claims
-        /// relevant = claims associated with the client the user was just selected.
+        /// This is the main index page 
+        /// This runs a filter based upon the paramaters to only show the relevant objects
         /// </summary>
-        /// <param name="searchString"></param>
-        /// <param name="name"></param>
-        /// <returns>This returns a filtered index page based upon the client id.</returns>
+        /// <param name="searchString"> The search string inputs the ID of the ApiResources linked to this </param>
+        /// <param name="name"> name will take the name of the Client linked to this </param>
+        /// <returns>index page</returns>
+        /// <example>GET: ClientClaims</example>
         public async Task<IActionResult> Index(string searchString, string name)
         {
             if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ClientName)))
@@ -55,7 +55,7 @@ namespace IdentityServer4.AdminUI.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                // converts teh search string to an int to perform the search function. 
+                // converts the search string to an int to perform the search function. 
                 var id = int.Parse(searchString);
                 client = client.Where(s => s.ClientId.Equals(id));
                 HttpContext.Session.SetInt32(Helpers.VarHelper.ClientId, id);
@@ -69,12 +69,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(await client.ToListAsync());
         }
 
-        // GET: ClientClaims/Details/5
         /// <summary>
-        /// This presents the details page bassed upon the id number passed to it. 
+        /// Displays the view for the Details page 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>returns the details view for the client claims passed to it. </returns>
+        /// <param name="id"> This is the table ID </param>
+        /// <returns>View Details</returns>
+        /// <example>GET: ClientClaims/Details/5</example>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -92,11 +92,11 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(clientClaims);
         }
 
-        // GET: ClientClaims/Create
         /// <summary>
-        /// create view
+        /// Displays the Create page 
         /// </summary>
-        /// <returns>clientclaims/create</returns>
+        /// <returns>View Create</returns>
+        /// <example>GET: ClientClaims/Create</example>
         public IActionResult Create()
         {
             if (HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) == null)
@@ -106,12 +106,11 @@ namespace IdentityServer4.AdminUI.Controllers
             return View();
         }
         /// <summary>
-        /// This is for the clients form. it binds the attributes to the client claims object, 
-        /// it uses that bind to confirm that the input is valid, it then saves it to the table and returns the view
+        /// create task - saves the create page form information to the table.
         /// </summary>
-        /// <param name="clientClaims"></param>
-        /// <returns></returns>
-        // POST: ClientClaims/Create
+        /// <param name="clientClaims">The object to be saved to the table</param>
+        /// <returns>Saves form to table, then returns to index</returns>
+        /// <example>POST: ClientClaims/Create</example>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ClientId,Type,Value")] ClientClaims clientClaims)
@@ -126,11 +125,11 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(clientClaims);
         }
         /// <summary>
-        /// Opens the edit page of of the client claims id that was passed
+        /// displays the edit view 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>returns us to the index page when complete, with the edits applied </returns>
-        // GET: ClientClaims/Edit/5
+        /// <param name="id">Item on table to edit</param>
+        /// <returns>Edit view</returns>
+        /// <example>ET: clientClaims/Edit/5</example>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -185,11 +184,11 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(clientClaims);
         }
         /// <summary>
-        /// delete page
+        /// Displays the Delete Page
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        // GET: ClientClaims/Delete/5
+        /// <param name="id">Location of item on table</param>
+        /// <returns>Delete View</returns>
+        /// <example>  GET: Clientclaims/Delete/5 </example>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -207,11 +206,11 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(clientClaims);
         }
         /// <summary>
-        /// the action to perform the delete, 
+        /// action to delete from table. 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        // POST: ClientClaims/Delete/5
+        /// <param name="id"> Location of item on table </param>
+        /// <returns>Index with item deleted</returns>
+        /// <example>  POST: ClientClaims/Delete/5</example>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -221,16 +220,19 @@ namespace IdentityServer4.AdminUI.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        /// <summary>
+        /// validates if claim exists = true
+        /// </summary>
+        /// <param name="id">item on table</param>
+        /// <returns>boolean</returns>
         private bool ClientClaimsExists(int id)
         {
             return _context.ClientClaims.Any(e => e.Id == id);
         }
         /// <summary>
-        /// This is a function that returns the current session id
-        /// this is used in the main index function to fetch the id incase it's not passed through.
+        /// retrieves the relevant id
         /// </summary>
-        /// <returns>currentl id stored in the session state</returns>
+        /// <returns>the id stored in the session state</returns>
         public int GetSessionId()
         {
             return HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) ?? default;

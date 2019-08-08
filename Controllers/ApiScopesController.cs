@@ -23,13 +23,14 @@ namespace IdentityServer4.AdminUI.Controllers
         #endregion
 
         #region Methods
-        // GET: ApiScopes
         /// <summary>
-        /// paramaters apply the filter for the page, sets up the session states. 
+        /// This is the main index page 
+        /// This runs a filter based upon the paramaters to only show the relevant objects
         /// </summary>
-        /// <param name="searchString"></param>
-        /// <param name="name"></param>
-        /// <returns>/apiscopes/index</returns>
+        /// <param name="searchString"> The search string inputs the ID of the ApiResources linked to this </param>
+        /// <param name="name"> name will take the name of the ApiResource linked to this </param>
+        /// <returns>index page</returns>
+        /// <example>GET: ApiScopes</example>
         public async Task<IActionResult> Index(string searchString, string name)
         {
             if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ApiResourceName)))
@@ -54,7 +55,7 @@ namespace IdentityServer4.AdminUI.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                // converts teh search string to an int to perform the search function. 
+                // converts the search string to an int to perform the search function. 
                 var id = int.Parse(searchString);
                 scope = scope.Where(s => s.ApiResourceId.Equals(id));
                 HttpContext.Session.SetInt32(Helpers.VarHelper.ApiResourceId, id);
@@ -68,12 +69,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(await scope.ToListAsync());
         }
 
-        // GET: ApiScopes/Details/5
         /// <summary>
-        /// details for the apiscopes at id "#"
+        /// Displays the view for the Details page 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>apiScopes/details/"#"</returns>
+        /// <param name="id"> This is the table ID </param>
+        /// <returns>View Details</returns>
+        /// <example>GET: ApiScopes/Details/5</example>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -97,11 +98,11 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiScopes);
         }
 
-        // GET: ApiScopes/Create
         /// <summary>
-        /// create view
+        /// Displays the Create page 
         /// </summary>
-        /// <returns>apiScopes/create</returns>
+        /// <returns>View Create</returns>
+        /// <example>GET: ApiScopes/Create</example>
         public IActionResult Create()
         {
             if (HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == null)
@@ -111,12 +112,11 @@ namespace IdentityServer4.AdminUI.Controllers
             return View();
         }
 
-        // POST: ApiScopes/Create
         /// <summary>
-        /// create action, saves the create form.
+        /// Displays the Create page 
         /// </summary>
-        /// <param name="apiScopes"></param>
-        /// <returns>api scopes index</returns>
+        /// <returns>View Create</returns>
+        /// <example>GET: ApiScopes/Create</example>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ApiResourceId,Description,DisplayName,Emphasize,Name,Required,ShowInDiscoveryDocument")] ApiScopes apiScopes)
@@ -130,12 +130,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiScopes);
         }
 
-        // GET: ApiScopes/Edit/5
         /// <summary>
-        /// edit page.
+        /// displays the edit view 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>apiScopes/Edit/"#"</returns>
+        /// <param name="id">Item on table to edit</param>
+        /// <returns>Edit view</returns>
+        /// <example>ET: ApiScopes/Edit/5</example>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -151,13 +151,13 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiScopes);
         }
 
-        // POST: ApiScopes/Edit/5
         /// <summary>
-        /// edit action, saves edit to table. 
+        /// Edit task, saves edits. 
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="apiScopes"></param>
-        /// <returns>apiScopes/index</returns>
+        /// <param name="id">Location of item on table</param>
+        /// <param name="apiScopes">updated object</param>
+        /// <returns>index page after updating table</returns>
+        /// <example> POST: Apiscopes/Edit/5  </example>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ApiResourceId,Description,DisplayName,Emphasize,Name,Required,ShowInDiscoveryDocument")] ApiScopes apiScopes)
@@ -189,13 +189,12 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             return View(apiScopes);
         }
-
-        // GET: ApiScopes/Delete/5
         /// <summary>
-        /// Delete view
+        /// Displays the Delete Page
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>apiScopes/Delete/"#"</returns>
+        /// <param name="id">Location of item on table</param>
+        /// <returns>Delete View</returns>
+        /// <example>  GET: ApiScopes/Delete/5 </example>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -213,12 +212,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiScopes);
         }
 
-        // POST: ApiScopes/Delete/5
         /// <summary>
-        /// delete action., deleted the item at id"#" 
+        /// action to delete from table. 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>index for apiscopes</returns>
+        /// <param name="id"> Location of item on table </param>
+        /// <returns>Index with item deleted</returns>
+        /// <example>  POST: ApiScopes/Delete/5</example>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -229,18 +228,18 @@ namespace IdentityServer4.AdminUI.Controllers
             return RedirectToAction(nameof(Index));
         }
         /// <summary>
-        /// checks if the apiscope exists on the table. 
+        /// validates if claim exists = true
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">item on table</param>
         /// <returns>boolean</returns>
         private bool ApiScopesExists(int id)
         {
             return _context.ApiScopes.Any(e => e.Id == id);
         }
         /// <summary>
-        /// retrieves the id from the session state
+        /// retrieves the relevant id
         /// </summary>
-        /// <returns>session id int. </returns>
+        /// <returns>the id stored in the session state</returns>
         public int GetSessionId()
         {
             return HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) ?? default; ;

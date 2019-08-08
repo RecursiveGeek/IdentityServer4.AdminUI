@@ -22,24 +22,23 @@ namespace IdentityServer4.AdminUI.Controllers
         #endregion
 
         #region Methods
-        // GET: ApiResources
         /// <summary>
-        /// displays the main api resources page.
+        /// This is the main index page 
+        /// This runs a filter based upon the paramaters to only show the relevant objects
         /// </summary>
-        /// <returns>/apiresources/index (view) </returns>
+        /// <returns>index page</returns>
+        /// <example>GET: ApiResources</example>
         public async Task<IActionResult> Index()
         {
             return View(await _context.ApiResources.ToListAsync());
         }
 
         /// <summary>
-        /// checks for existing resource, also sets the session states
+        /// Displays the view for the Details page 
         /// </summary>
-        /// <param name="id">Identity collumn</param>
-        /// <returns>apiresources/details/"id"</returns>
-        /// <remarks>
-        /// Example GET: ApiResources/Details/5
-        /// </remarks>
+        /// <param name="id"> This is the  table ID </param>
+        /// <returns>View  Details</returns>
+        /// <example>GET: ApiResources/Details/5</example>
         public async Task<IActionResult> Details(int? id)
         {
 
@@ -66,22 +65,22 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiResources);
         }
 
-        // GET: ApiResources/Create
         /// <summary>
-        /// opens the create view
+        /// Displays the Create page
         /// </summary>
-        /// <returns>apiresources/create</returns>
+        /// <returns>View  Create</returns>
+        /// <example>GET: ApiResources/Create</example>
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ApiResources/Create
         /// <summary>
-        /// the create action, saves to the table
+        /// create task - saves the create page form information to the table.
         /// </summary>
-        /// <param name="apiResources"></param>
-        /// <returns>apiresources index page</returns>
+        /// <param name="apiResources">The object to be saved to the table</param>
+        /// <returns>Saves form to table, then returns to index</returns>
+        /// <example>POST: ApiResources/Create</example>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Description,DisplayName,Enabled,Name")] ApiResources apiResources)
@@ -95,12 +94,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiResources);
         }
 
-        // GET: ApiResources/Edit/5
         /// <summary>
-        /// sets the session information, opens edit view
+        /// Edit task, saves edits. 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns> /apiresources/edit </returns>
+        /// <param name="id">Location of item on table</param>
+        /// <returns>index page after updating table</returns>
+        /// <example> POST: ApiResources/Edit/5  </example>
         public async Task<IActionResult> Edit(int? id)
         {
             Sessionid = id ?? default;
@@ -124,13 +123,13 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiResources);
         }
 
-        // POST: ApiResources/Edit/5
         /// <summary>
-        /// the edit action , saves edits to table.
+        /// Edit task, saves edits. 
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="apiResources"></param>
-        /// <returns>api resources index page.</returns>
+        /// <param name="id">Location of item on table</param>
+        /// <param name="apiResources">updated object</param>
+        /// <returns>index page after updating table</returns>
+        /// <example> POST: ApiResources/Edit/5  </example>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Description,DisplayName,Enabled,Name")] ApiResources apiResources)
@@ -164,12 +163,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiResources);
         }
 
-        // GET: ApiResources/Delete/5
         /// <summary>
-        /// opens the delete view
+        /// Displays the Delete Page
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>/apiresources/delete/"#"</returns>
+        /// <param name="id">Location of item on table</param>
+        /// <returns>Delete View</returns>
+        /// <example>  GET: ApiResources/Delete/5 </example>
         public async Task<IActionResult> Delete(int? id)
         {
 
@@ -196,12 +195,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiResources);
         }
 
-        // POST: ApiResources/Delete/5
         /// <summary>
-        /// This deletes the resource from the table
+        /// action to delete from table. 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>apiresources / index </returns>
+        /// <param name="id"> Location of item on table </param>
+        /// <returns>Index with item deleted</returns>
+        /// <example>  POST: ApiResources/Delete/5</example>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -212,10 +211,10 @@ namespace IdentityServer4.AdminUI.Controllers
             return RedirectToAction(nameof(Index));
         }
         /// <summary>
-        /// checks if the api resource exists. 
+        /// validates if claim exists = true
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>t/f, is there na api resource at id "#"</returns>
+        /// <param name="id">item on table</param>
+        /// <returns>boolean</returns>
         private bool ApiResourcesExists(int id)
         {
             return _context.ApiResources.Any(e => e.Id == id);

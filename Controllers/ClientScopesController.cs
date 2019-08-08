@@ -21,8 +21,15 @@ namespace IdentityServer4.AdminUI.Controllers
         }
         #endregion
 
-        #region Methods
-        // GET: ClientScopes
+        #region Methods      
+        /// <summary>
+        /// This is the main index page 
+        /// This runs a filter based upon the paramaters to only show the relevant objects
+        /// </summary>
+        /// <param name="searchString"> The search string inputs the ID of the client linked to this </param>
+        /// <param name="name"> name will take the name of the Client linked to this </param>
+        /// <returns>index page</returns>
+        /// <example>GET: ClientScopes</example>
         public async Task<IActionResult> Index(string searchString, string name)
         {
             if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ClientName)))
@@ -60,8 +67,12 @@ namespace IdentityServer4.AdminUI.Controllers
             // returns an update with our clints that we searched. 
             return View(await client.ToListAsync());
         }
-
-        // GET: ClientScopes/Details/5
+        /// <summary>
+        /// Displays the view for the Details page 
+        /// </summary>
+        /// <param name="id"> This is the table ID </param>
+        /// <returns>View Details</returns>
+        /// <example>GET: ClientScopes/Details/5</example>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -78,8 +89,11 @@ namespace IdentityServer4.AdminUI.Controllers
 
             return View(clientScopes);
         }
-
-        // GET: ClientScopes/Create
+        /// <summary>
+        /// Displays the Create page 
+        /// </summary>
+        /// <returns>View Create</returns>
+        /// <example>GET: ClientScopes/Create</example>
         public IActionResult Create()
         {
             if (HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.ClientId) == null)
@@ -88,8 +102,12 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             return View();
         }
-
-        // POST: ClientScopes/Create
+        /// <summary>
+        /// create task - saves the create page form information to the table.
+        /// </summary>
+        /// <param name="clientScopes">The object to be saved to the table</param>
+        /// <returns>Saves form to table, then returns to index</returns>
+        /// <example>POST: ClientScopes/Create</example>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ClientId,Scope")] ClientScopes clientScopes)
@@ -102,8 +120,12 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             return View(clientScopes);
         }
-
-        // GET: ClientScopes/Edit/5
+        /// <summary>
+        /// displays the edit view 
+        /// </summary>
+        /// <param name="id">Item on table to edit</param>
+        /// <returns>Edit view</returns>
+        /// <example>ET: ClientScopes/Edit/5</example>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -118,8 +140,13 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             return View(clientScopes);
         }
-
-        // POST: ClientScopes/Edit/5
+        /// <summary>
+        /// Edit task, saves edits. 
+        /// </summary>
+        /// <param name="id">Location of item on table</param>
+        /// <param name="clientScopes">updated object</param>
+        /// <returns>index page after updating table</returns>
+        /// <example> POST: ClientScopes/Edit/5  </example>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ClientId,Scope")] ClientScopes clientScopes)
@@ -151,8 +178,12 @@ namespace IdentityServer4.AdminUI.Controllers
             }
             return View(clientScopes);
         }
-
-        // GET: ClientScopes/Delete/5
+        /// <summary>
+        /// Displays the Delete Page
+        /// </summary>
+        /// <param name="id">Location of item on table</param>
+        /// <returns>Delete View</returns>
+        /// <example>  GET: ClientScopes/Delete/5 </example>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -169,8 +200,12 @@ namespace IdentityServer4.AdminUI.Controllers
 
             return View(clientScopes);
         }
-
-        // POST: ClientScopes/Delete/5
+        /// <summary>
+        /// action to delete from table. 
+        /// </summary>
+        /// <param name="id"> Location of item on table </param>
+        /// <returns>Index with item deleted</returns>
+        /// <example>  POST: ClientScopes/Delete/5</example>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

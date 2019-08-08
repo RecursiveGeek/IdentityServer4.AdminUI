@@ -22,14 +22,14 @@ namespace IdentityServer4.AdminUI.Controllers
         #endregion
 
         #region Methods
-        // GET: ApiScopeClaims
         /// <summary>
-        /// paramaters are used to filter the relevant scope claims
-        /// These are used with the session states for displaying names carried between the pages
+        /// This is the main index page 
+        /// This runs a filter based upon the paramaters to only show the relevant objects
         /// </summary>
-        /// <param name="searchString"></param>
-        /// <param name="name"></param>
-        /// <returns> ScopeClaims/Index </returns>
+        /// <param name="searchString"> The search string inputs the ID of the ApiResources linked to this </param>
+        /// <param name="name"> name will take the name of the ApiResource linked to this </param>
+        /// <returns> index page</returns>
+        /// <example>GET: ApiScopeclaims</example>
         public async Task<IActionResult> Index(string searchString, string name)
         {
             if (string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(HttpContext.Session.GetString(Helpers.VarHelper.ApiScopeName)))
@@ -54,7 +54,7 @@ namespace IdentityServer4.AdminUI.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                // converts teh search string to an int to perform the search function. 
+                // converts the search string to an int to perform the search function. 
                 var id = int.Parse(searchString);
                 claim = claim.Where(s => s.ApiScopeId.Equals(id));
                 HttpContext.Session.SetInt32(Helpers.VarHelper.ApiScopeId, id);
@@ -69,12 +69,12 @@ namespace IdentityServer4.AdminUI.Controllers
         }
 
 
-        // GET: ApiScopeClaims/Details/5
         /// <summary>
-        /// returns the details associated with the passed scopes claim id. 
+        /// Displays the view for the Details page 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>/apiscopeclaims/details/"#"</returns>
+        /// <param name="id"> This is the table ID </param>
+        /// <returns>View Details</returns>
+        /// <example>GET: ApiScopeClaims/Details/5</example>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -93,10 +93,10 @@ namespace IdentityServer4.AdminUI.Controllers
         }
 
         /// <summary>
-        /// the create view
+        /// Displays the Create page 
         /// </summary>
-        /// <returns>/apiscopeclaims/create</returns>
-        // GET: ApiScopeClaims/Create
+        /// <returns>View Create</returns>
+        /// <example>GET: ApiScopeClaims/Create</example>
         public IActionResult Create()
         {
             if (HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == 0 || HttpContext.Session.GetInt32(Helpers.VarHelper.ApiResourceId) == null)
@@ -106,12 +106,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View();
         }
 
-        // POST: ApiScopeClaims/Create
         /// <summary>
-        /// this is the action to create, saves it to the table.
+        /// create task - saves the create page form information to the table.
         /// </summary>
-        /// <param name="apiScopeClaims"></param>
-        /// <returns>returns to the apiscopeclaims index view</returns>
+        /// <param name="apiScopeClaims">The object to be saved to the table</param>
+        /// <returns>Saves form to table, then returns to index</returns>
+        /// <example>POST: ApiScopeclaims/Create</example>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ApiScopeId,Type")] ApiScopeClaims apiScopeClaims)
@@ -125,12 +125,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiScopeClaims);
         }
 
-        // GET: ApiScopeClaims/Edit/5
         /// <summary>
-        /// edit view
+        /// displays the edit view.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>/apiscopeclaims/edit/"#"</returns>
+        /// <param name="id">Item on table to edit</param>
+        /// <returns>Edit view</returns>
+        /// <example>ET: ApiScopeClaims/Edit/5</example>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -146,13 +146,13 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiScopeClaims);
         }
 
-        // POST: ApiScopeClaims/Edit/5
         /// <summary>
-        /// edit action, saves edits from form to table. 
+        /// Edit task, saves edits. 
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="apiScopeClaims"></param>
-        /// <returns>apiScopeClaim index</returns>
+        /// <param name="id">Location of item on table</param>
+        /// <param name="apiScopeClaims">updated object</param>
+        /// <returns>index page after updating table</returns>
+        /// <example> POST: ApiScopeclaims/Edit/5  </example>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ApiScopeId,Type")] ApiScopeClaims apiScopeClaims)
@@ -185,12 +185,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiScopeClaims);
         }
 
-        // GET: ApiScopeClaims/Delete/5
         /// <summary>
-        /// opens delete view
+        /// Displays the Delete Page
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>delete view for id "#"</returns>
+        /// <param name="id">Location of item on table</param>
+        /// <returns>Delete View</returns>
+        /// <example>  GET: ApiScopeclaims/Delete/5 </example>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -208,12 +208,12 @@ namespace IdentityServer4.AdminUI.Controllers
             return View(apiScopeClaims);
         }
 
-        // POST: ApiScopeClaims/Delete/5
         /// <summary>
-        /// delete action
+        /// action to delete from table. 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>api scope claim index</returns>
+        /// <param name="id"> Location of item on table </param>
+        /// <returns>Index with item deleted</returns>
+        /// <example>  POST: ApiScopeClaims/Delete/5</example>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -224,18 +224,18 @@ namespace IdentityServer4.AdminUI.Controllers
             return RedirectToAction(nameof(Index));
         }
         /// <summary>
-        /// checks if the scope claim at id "#" exists on the table. 
+        /// validates if claim exists = true
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>true/false</returns>
+        /// <param name="id">item on table</param>
+        /// <returns>boolean</returns>
         private bool ApiScopeClaimsExists(int id)
         {
             return _context.ApiScopeClaims.Any(e => e.Id == id);
         }
         /// <summary>
-        /// returns the session id 
+        /// retrieves the relevant id
         /// </summary>
-        /// <returns>the id from the session state. </returns>
+        /// <returns>the id stored in the session state</returns>
         public int GetSessionId()
         {
             return HttpContext.Session.GetInt32(Helpers.VarHelper.ApiScopeId) ?? default;
